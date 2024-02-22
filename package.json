@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/blob": "^0.22.1",
     "@vercel/postgres": "^0.7.2",
     "next": "14.1.0",
     "next-auth": "^4.24.6",
