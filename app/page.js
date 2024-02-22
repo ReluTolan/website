@@ -1,95 +1,89 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import "./globals.css"
+import Link from "next/link"
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <main>
+        <div className="hero">
+          <h1 className="hero-title">Titlul website-ului</h1>
+          <p className="hero-subtitle">Bine ati venit</p>
+          <button className="hero-cta">Despre noi</button>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
+        <div className="section">
+          <h2 className="section-header" style={{ color: "white" }}>
+            Despre aplicatie
           </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+          <div className="card">
+            <h1>Ce puteti vedea aici</h1>
+            <p>
+              Aici puteți vedea o varietate de informații interesante și utile
+              despre locul nostru minunat. Cu ajutorul nostru, veți descoperi
+              frumusețea naturii, cultura locală bogată și opțiunile nelimitate
+              de divertisment. <br /> <br />
+              Indiferent dacă sunteți în căutarea aventurilor în aer liber sau
+              doriți să explorați atracțiile culturale, suntem aici pentru a vă
+              oferi informațiile de care aveți nevoie pentru a vă bucura la
+              maxim de călătoria dumneavoastră. <br />
+              <br />
+              Indiferent dacă sunteți pasionat de natură sau de artă, aici veți
+              găsi ceva care să vă fascineze. Puteți explora frumusețea
+              peisajelor naturale sau vă puteți pierde în lumea artei cu
+              colecția noastră impresionantă. În plus, avem numeroase evenimente
+              și activități planificate pentru a vă oferi o experiență
+              memorabilă. Haideți să începem călătoria împreună și să facem din
+              fiecare moment o aventură de neuitat!
+            </p>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+            <br />
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
+            <h1>Tipuri de picturi</h1>
+            <p>
+              În lumea artei, există o varietate de tipuri de picturi, fiecare
+              având propria sa frumusețe și semnificație. De la picturile
+              abstracte care vă invită să vă lăsați imaginația să zboare, până
+              la cele realiste care surprind fiecare detaliu cu precizie
+              uluitoare, există ceva pentru fiecare gust artistic. <br />
+              <br /> Descoperiți lumile vibrante și expresive create de artiști
+              talentați din întreaga lume. Fie că sunteți un iubitor al
+              impresionismului, al artei contemporane sau al picturilor clasice,
+              există multe de explorat și de apreciat în lumea picturilor.
+              Haideți să vă aventurați în această călătorie artistică și să vă
+              bucurați de diversitatea tipurilor de picturi care vă vor încânta
+              ochii și sufletul!
+            </p>
+          </div>
+        </div>
+      </main>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+      <footer>
+        <div className="footer">
+          <div className="footer-links">
+            <Link href="/" className="footer-link">
+              Acasa
+            </Link>
+            <Link href="/expozitie/Aurelia" className="footer-link">
+              Expozitie cu vanzare
+            </Link>
+            <Link href="/constignatie" className="footer-link">
+              Piata de vechi
+            </Link>
+            <Link href="/istoria-artei" className="footer-link">
+              Intrebari frecvente
+            </Link>
+            <Link href="/noutati" className="footer-link">
+              Termeni si conditii
+            </Link>
+            <Link href="/noutati" className="footer-link">
+              Contact
+            </Link>
+            <Link href="/noutati" className="footer-link">
+              Despre noi
+            </Link>
+          </div>
+          <p className="footer-text">© 2024 Relu Tolan</p>
+        </div>
+      </footer>
+    </>
+  )
 }
