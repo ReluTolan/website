@@ -33,33 +33,49 @@ export default function PaintForm() {
 
     // Upload primary image
     const primaryImageFile = primaryImageFileRef.current.files[0]
-    const primaryImageResponse = await fetch(
-      `/api/upload-file?filename=${primaryImageFile.name}`,
-      {
-        method: "POST",
-        body: primaryImageFile,
+    let primaryImageUrl = "" // Initialize primaryImageUrl
+    if (primaryImageFile) {
+      const formDataPrimary = new FormData()
+      formDataPrimary.append("file", primaryImageFile)
+      try {
+        const primaryImageResponse = await fetch("/api/s3-upload", {
+          method: "POST",
+          body: formDataPrimary,
+        })
+        if (primaryImageResponse.ok) {
+          const primaryImageBlob = await primaryImageResponse.json()
+          primaryImageUrl = primaryImageBlob.imageUrl // Assuming this is the key in the response
+        }
+      } catch (error) {
+        console.error("Error uploading primary image:", error)
       }
-    )
-    const primaryImageBlob = await primaryImageResponse.json()
-    const primaryImageUrl = primaryImageBlob.url // Directly use this URL
+    }
 
     // Upload sub-images
-    const subImageUrls = await Promise.all(
-      subImageFileRefs.current.map(async file => {
+    const subImageUploadPromises = subImageFileRefs.current.map(
+      async (file, index) => {
         if (!file) return null // Skip if no file is selected
-        const subImageResponse = await fetch(
-          `/api/upload-file?filename=${file.name}`,
-          {
+        const formDataSub = new FormData()
+        formDataSub.append("file", file)
+        try {
+          const subImageResponse = await fetch("/api/s3-upload", {
             method: "POST",
-            body: file,
+            body: formDataSub,
+          })
+          if (subImageResponse.ok) {
+            const subImageBlob = await subImageResponse.json()
+            return subImageBlob.imageUrl // Collect URLs
           }
-        )
-        const subImageBlob = await subImageResponse.json()
-        return subImageBlob.url // Collect URLs
-      })
+        } catch (error) {
+          console.error(`Error uploading sub image ${index + 1}:`, error)
+          return null
+        }
+      }
     )
 
-    // Filter out any null values in case there are empty slots
+    const subImageUrls = await Promise.all(subImageUploadPromises)
+
+    // Filter out any null values in case there were upload errors
     const filteredSubImageUrls = subImageUrls.filter(url => url !== null)
 
     // Construct form data with updated image URLs
