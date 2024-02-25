@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from "react"
 import "../page-styles.css"
+import ErrorMessageModal from "@/app/components/ErrorModal"
 
 export default function PaintForm() {
   const [painter, setPainter] = useState("")
@@ -12,13 +13,37 @@ export default function PaintForm() {
   const [price, setPrice] = useState("")
   const [email, setEmail] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
+  const [error, setError] = useState("")
+  const [primaryImageFileName, setPrimaryImageFileName] = useState("")
+  const [subImageFileNames, setSubImageFileNames] = useState([])
 
   const primaryImageFileRef = useRef(null)
   const subImageFileRefs = useRef([])
 
-  // Handle sub-image input fields change
+  const handlePrimaryImageChange = e => {
+    const file = e.target.files[0]
+    if (file) {
+      setPrimaryImageFileName(file.name)
+    } else {
+      setPrimaryImageFileName("")
+    }
+  }
+
   const handleSubImageChange = index => e => {
-    subImageFileRefs.current[index] = e.target.files[0] // Directly storing the file object
+    const files = e.target.files
+    if (files.length > 0) {
+      const file = files[0]
+      subImageFileRefs.current[index] = file // Keep storing the file object
+      // Update the file name in the state
+      const newFileNames = [...subImageFileNames]
+      newFileNames[index] = file.name
+      setSubImageFileNames(newFileNames)
+    } else {
+      // Reset the file name at this index if no file is selected
+      const newFileNames = [...subImageFileNames]
+      newFileNames[index] = undefined // Or use "" to clear the name
+      setSubImageFileNames(newFileNames)
+    }
   }
 
   // Handle click on "Add sub-image" button
@@ -31,9 +56,21 @@ export default function PaintForm() {
   const handleSubmit = async e => {
     e.preventDefault()
 
+    const sizeRegex = /^\d+x\d+$/
+    if (!sizeRegex.test(size)) {
+      setError(
+        "Dimensiunea trebuie să fie în formatul 'număr x număr' (exemplu: 10x10, 100x200, etc). Fara spatii sau alte caractere (doar cifre si x)."
+      )
+      return // Stop the form submission
+    }
+
     // Upload primary image
     const primaryImageFile = primaryImageFileRef.current.files[0]
-    let primaryImageUrl = "" // Initialize primaryImageUrl
+    if (!primaryImageFile) {
+      setError("Trebuie sa selectezi imaginea de baza.")
+      return
+    }
+    let primaryImageUrl = ""
     if (primaryImageFile) {
       const formDataPrimary = new FormData()
       formDataPrimary.append("file", primaryImageFile)
@@ -42,19 +79,28 @@ export default function PaintForm() {
           method: "POST",
           body: formDataPrimary,
         })
-        if (primaryImageResponse.ok) {
+        if (!primaryImageResponse.ok) {
+          setError(`Imaginea principala a refuzat sa fie incarcata.`)
+          return
+        } else {
           const primaryImageBlob = await primaryImageResponse.json()
-          primaryImageUrl = primaryImageBlob.imageUrl // Assuming this is the key in the response
+          primaryImageUrl = primaryImageBlob.imageUrl
         }
       } catch (error) {
-        console.error("Error uploading primary image:", error)
+        console.error(
+          "O prostie de eroare de la server (nu e vina website-ului): ",
+          error
+        )
+        setError(
+          "Imaginea principala a refuzat sa fie incarcata. Eroare probabil de la internet."
+        )
       }
     }
 
     // Upload sub-images
     const subImageUploadPromises = subImageFileRefs.current.map(
       async (file, index) => {
-        if (!file) return null // Skip if no file is selected
+        if (!file) return null
         const formDataSub = new FormData()
         formDataSub.append("file", file)
         try {
@@ -62,10 +108,8 @@ export default function PaintForm() {
             method: "POST",
             body: formDataSub,
           })
-          if (subImageResponse.ok) {
-            const subImageBlob = await subImageResponse.json()
-            return subImageBlob.imageUrl // Collect URLs
-          }
+          const subImageBlob = await subImageResponse.json()
+          return subImageBlob.imageUrl
         } catch (error) {
           console.error(`Error uploading sub image ${index + 1}:`, error)
           return null
@@ -117,6 +161,7 @@ export default function PaintForm() {
 
   return (
     <div style={{ backgroundColor: "#3F577D", height: "100vh" }}>
+      <ErrorMessageModal message={error} onClose={() => setError("")} />
       <div className="paintings-form">
         <form onSubmit={handleSubmit} style={{ marginTop: "150px" }}>
           <input
@@ -124,14 +169,17 @@ export default function PaintForm() {
             value={painter}
             onChange={e => setPainter(e.target.value)}
             placeholder="Pictor"
+            required
           />
           <label className="file-label" style={{ marginBottom: "20px" }}>
-            Imaginea principală a picturii
+            {primaryImageFileName
+              ? `Imagine selectată: ${primaryImageFileName}`
+              : "Imaginea principală a picturii"}
             <input
               type="file"
               className="file-input"
               ref={primaryImageFileRef}
-              onChange={() => {}}
+              onChange={handlePrimaryImageChange}
             />
           </label>
 
@@ -141,7 +189,9 @@ export default function PaintForm() {
               style={{ marginBottom: "20px" }}
               key={index}
             >
-              {`Imagine adiacentă ${index + 1}`}
+              {subImageFileNames[index]
+                ? `Imagine adiacentă selectată: ${subImageFileNames[index]}`
+                : `Imagine adiacentă ${index + 1}`}
               <input
                 type="file"
                 className="file-input"
@@ -159,23 +209,27 @@ export default function PaintForm() {
             value={title}
             onChange={e => setTitle(e.target.value)}
             placeholder="Titlu"
+            required
           />
           <textarea
             value={description}
             onChange={e => setDescription(e.target.value)}
             placeholder="Descriere"
+            required
           ></textarea>
           <input
             type="text"
             value={size}
             onChange={e => setSize(e.target.value)}
             placeholder="Dimensiune"
+            required
           />
           <input
-            type="text"
+            type="number"
             value={price}
             onChange={e => setPrice(e.target.value)}
             placeholder="Preț"
+            required
           />
 
           <input

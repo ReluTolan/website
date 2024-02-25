@@ -328,3 +328,15 @@ textarea::placeholder {
 .file-label:hover {
   background-color: #ccc;
 }
+
+/* Error Modal */
+.error-modal {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid red;
+  padding: 10px;
+}
