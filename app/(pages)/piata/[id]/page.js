@@ -81,7 +81,7 @@ const ImageDetails = ({ params }) => {
       )}
 
       <button>
-        <Link href={`./${painting.id}/${painting.id}`}>Delete admin</Link>
+        <Link href={`/delete-piata/${painting.id}`}>Delete admin</Link>
       </button>
     </div>
   )
