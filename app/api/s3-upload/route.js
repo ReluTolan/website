@@ -10,10 +10,11 @@ const s3Client = new S3Client({
   },
 })
 
-async function uploadFileToS3(file, fileName) {
+async function uploadFileToS3(file, fileName, sourceFolder) {
   const fileBuffer = file
   const contentType = mime.lookup(fileName) || "application/octet-stream"
-  const key = `images/${fileName}-${Date.now()}`
+  // Dynamically set the folder based on the source page
+  const key = `${sourceFolder}/${fileName}-${Date.now()}`
 
   const params = {
     Bucket: process.env.AWS_S3_BUCKET_NAME,
@@ -26,8 +27,6 @@ async function uploadFileToS3(file, fileName) {
   await s3Client.send(command)
 
   // Construct the URL for the uploaded image
-  // Note: This URL format assumes the bucket is not configured for a custom domain.
-  // Adjust accordingly if you're using a custom domain.
   const imageUrl = `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_S3_REGION}.amazonaws.com/${key}`
   return imageUrl
 }
@@ -36,17 +35,21 @@ export async function POST(request) {
   try {
     const formData = await request.formData()
     const file = formData.get("file")
+    // Extract the sourcePage identifier; default to 'unknown' if not provided
+    const sourcePage = formData.get("sourcePage") || "unknown"
 
     if (!file) {
       return NextResponse.json({ error: "File is required." }, { status: 400 })
     }
 
     const buffer = Buffer.from(await file.arrayBuffer())
-    const imageUrl = await uploadFileToS3(buffer, file.name)
+    // Pass the buffer, file name, and source folder to the upload function
+    const imageUrl = await uploadFileToS3(buffer, file.name, sourcePage)
 
     // Return the image URL in the response
     return NextResponse.json({ success: true, imageUrl })
   } catch (error) {
-    return NextResponse.json({ error })
+    // Provide a more descriptive error message in the JSON response
+    return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }

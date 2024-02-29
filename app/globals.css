@@ -47,10 +47,10 @@ a {
   margin-right: 20px;
 }
 @media (min-width: 901px) {
-  .navbar li:nth-child(6) {
+  .navbar li:nth-child(4) {
     margin-left: auto;
   }
-  .navbar li:nth-child(7) {
+  .navbar li:nth-child(5) {
     margin-left: 0;
   }
 }

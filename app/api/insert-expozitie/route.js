@@ -37,6 +37,6 @@ export async function POST(request) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 
-  const artworks = await sql`SELECT * FROM paintings;`
-  return NextResponse.json({ artworks }, { status: 200 })
+  const success = { message: "Formularul a fost incarcat cu succes!" }
+  return NextResponse.json(success, { status: 200 })
 }

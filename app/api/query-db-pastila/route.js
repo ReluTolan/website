@@ -4,8 +4,7 @@ import { NextResponse } from "next/server"
 
 export async function GET() {
   try {
-    const result = await client.sql`SELECT * FROM paintings;`
-    console.log(result.rows)
+    const result = await client.sql`SELECT * FROM pastila;`
     return NextResponse.json(result.rows)
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })

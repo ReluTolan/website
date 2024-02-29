@@ -13,22 +13,30 @@ const getSizeCategory = sizeCm => {
   return "mare"
 }
 
-const PainterPage = ({ params }) => {
+const PainterPage = () => {
   const [searchTerm, setSearchTerm] = useState("")
   const [size, setSize] = useState("")
   const [price, setPrice] = useState("")
+  const [selectedPainter, setSelectedPainter] = useState("")
   const [filteredPaintings, setFilteredPaintings] = useState([])
   const [allPaintings, setAllPaintings] = useState([])
+  const [painters, setPainters] = useState([])
+  const [availability, setAvailability] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/query-db-paints", {
+        const response = await fetch("/api/query-db-expozitie", {
           cache: "no-store",
         })
         const data = await response.json()
-        console.log(data)
         setAllPaintings(data)
+
+        // Extract and deduplicate painter names
+        const uniquePainters = [
+          ...new Set(data.map(painting => painting.painter)),
+        ]
+        setPainters(uniquePainters)
       } catch (error) {
         console.error(error)
       }
@@ -47,21 +55,38 @@ const PainterPage = ({ params }) => {
         ;[minPrice, maxPrice] = price.split("-").map(Number)
       }
       const sizeCategory = getSizeCategory(painting.size)
+
+      // Determine if the painting matches the availability filter
+      let matchesAvailability = true
+      if (availability === "disponibile") {
+        // Check if description does not contain "indisponib" base
+        matchesAvailability = !painting.description
+          .toLowerCase()
+          .includes("indisponib")
+      } else if (availability === "indisponibile") {
+        // Check if description contains "indisponib" base
+        matchesAvailability = painting.description
+          .toLowerCase()
+          .includes("indisponib")
+      }
+
+      // Combine availability check with other filtering conditions
       return (
-        painting.painter === params.painter &&
+        (selectedPainter === "" || painting.painter === selectedPainter) &&
+        matchesAvailability && // Check if painting matches availability filter
         (price
           ? maxPrice
             ? painting.price >= minPrice && painting.price <= maxPrice
             : painting.price >= minPrice
-          : true) &&
+          : true) && // Price range filter
         (searchTerm === "" ||
-          painting.title.toLowerCase().includes(searchTerm)) &&
-        (size === "" || sizeCategory === size)
+          painting.title.toLowerCase().includes(searchTerm.toLowerCase())) &&
+        (size === "" || sizeCategory === size) // Size filter
       )
     })
 
     setFilteredPaintings(newFilteredPaintings)
-  }, [params.painter, price, searchTerm, size, allPaintings])
+  }, [price, searchTerm, size, allPaintings, selectedPainter, availability])
 
   return (
     <>
@@ -69,26 +94,46 @@ const PainterPage = ({ params }) => {
         onSearchChange={setSearchTerm}
         onSizeChange={setSize}
         onPriceChange={setPrice}
+        painters={painters} // Pass painters to Sidebar
+        onPainterChange={setSelectedPainter} // Handle painter selection
       />
+      <div style={{ marginTop: "100px" }}>
+        <button style={{ display: "block", marginLeft: "45%" }}>
+          <Link href="/adaugare">Adaugare tablouri</Link>
+        </button>
 
-      {filteredPaintings.length > 0 ? (
-        filteredPaintings.map(painting => (
-          <Link href={`./${params.painter}/${painting.id}`} key={painting.id}>
-            <ImagePainting
+        <div>
+          <button onClick={() => setAvailability("disponibile")}>
+            Disponibile
+          </button>
+          <button onClick={() => setAvailability("indisponibile")}>
+            Indisponibile
+          </button>
+        </div>
+
+        {filteredPaintings.length > 0 ? (
+          filteredPaintings.map(painting => (
+            <Link
+              href={`./${painting.painter}/${painting.id}`}
               key={painting.id}
-              src={painting.primary_image}
-              alt={painting.title}
-              title={painting.title}
-              category={painting.category}
-              description={painting.description}
-              size={painting.size}
-              price={painting.price}
-            />{" "}
-          </Link>
-        ))
-      ) : (
-        <p>No paintings to show.</p>
-      )}
+            >
+              {" "}
+              <ImagePainting
+                key={painting.id}
+                src={painting.primary_image}
+                alt={painting.title}
+                title={painting.title}
+                category={painting.category}
+                description={painting.description}
+                size={painting.size}
+                price={painting.price}
+              />
+            </Link>
+          ))
+        ) : (
+          <p>No paintings to show.</p>
+        )}
+      </div>
     </>
   )
 }

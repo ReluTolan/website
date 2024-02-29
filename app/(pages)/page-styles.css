@@ -29,8 +29,7 @@
 
 .Ip-container {
   text-align: center;
-  width: 150px;
-  height: 150px;
+  width: 300px;
   margin-right: 50px;
   display: inline-block;
   vertical-align: middle;
@@ -44,8 +43,8 @@
 }
 
 .Ip-image {
-  width: 125px;
-  height: 125px;
+  width: 250px;
+  height: 250px;
   display: flex; /* add this */
   align-items: center; /* add this */
   justify-content: center; /* add this */
@@ -114,6 +113,14 @@
   color: #ecf0f1; /* same color as the text for consistency */
 }
 
+.sidebar h4 {
+  border: 2px solid black;
+  background-color: #6085c1;
+  border-radius: 5px;
+  padding-left: 10px;
+  font-size: 20px;
+  margin: 20px 0px;
+}
 /* Sidebar Animation */
 .sidebar.closed {
   transform: translateX(-100%);
@@ -339,4 +346,14 @@ textarea::placeholder {
   background-color: white;
   border: 1px solid red;
   padding: 10px;
+}
+
+/* Pastila de ia */
+
+.pastila-focus {
+  text-align: center;
+}
+
+.pastila-focus img {
+  width: 800px;
 }

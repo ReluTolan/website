@@ -16,30 +16,20 @@ export default function Navbar() {
           </Link>
         </li>
         <li className="navbar-item">
-          <Link href="/expozitie/Aurelia" className="navbar-link">
+          <Link href="/expozitie/pictori" className="navbar-link">
             Expozitie cu vanzare
           </Link>
         </li>
 
         <li className="navbar-item">
-          <Link href="/adaugare" className="navbar-link">
-            Adaugare tablouri
-          </Link>
-        </li>
-        <li className="navbar-item">
-          <Link href="/constignatie" className="navbar-link">
+          <Link href="/piata" className="navbar-link">
             Piata de vechi
-          </Link>
-        </li>
-        <li className="navbar-item">
-          <Link href="/adaugare-piata" className="navbar-link">
-            Adaugare piata
           </Link>
         </li>
 
         <li className="navbar-item">
-          <Link href="/istoria-artei" className="navbar-link">
-            Cum cumpar
+          <Link href="/contact" className="navbar-link">
+            Contact
           </Link>
         </li>
         <li className="navbar-item">

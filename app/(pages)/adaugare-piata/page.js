@@ -4,17 +4,17 @@ import React, { useState, useRef } from "react"
 import "../page-styles.css"
 import ErrorMessageModal from "@/app/components/ErrorModal"
 
-export default function PaintForm() {
-  const [painter, setPainter] = useState("")
-  const [subImages, setSubImages] = useState([null]) // Initialize with null for file inputs
+export default function ProductForm() {
+  const [nume, setNume] = useState("")
+  const [prenume, setPrenume] = useState("")
+  const [primaryImageFileName, setPrimaryImageFileName] = useState("")
+  const [subImages, setSubImages] = useState([null])
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  const [size, setSize] = useState("")
   const [price, setPrice] = useState("")
   const [email, setEmail] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
   const [error, setError] = useState("")
-  const [primaryImageFileName, setPrimaryImageFileName] = useState("")
   const [subImageFileNames, setSubImageFileNames] = useState([])
   const [termsAccepted, setTermsAccepted] = useState(false)
   const [dataProcessingAccepted, setDataProcessingAccepted] = useState(false)
@@ -49,31 +49,14 @@ export default function PaintForm() {
     }
   }
 
-  // Handle click on "Add sub-image" button
   const handleAddSubImage = () => {
     setSubImages([...subImages, null]) // Just to trigger a new input field
     subImageFileRefs.current.push(null)
   }
 
-  // Handle form submission
   const handleSubmit = async e => {
     e.preventDefault()
     setIsSubmitting(true)
-
-    if (!termsAccepted || !dataProcessingAccepted) {
-      setError(
-        "Pentru a trimite formularul, trebuie sa fiti de acord cu termenii si conditiile si cu prelucrarea datelor."
-      )
-      return
-    }
-
-    const sizeRegex = /^\d+x\d+$/
-    if (!sizeRegex.test(size)) {
-      setError(
-        "Dimensiunea trebuie să fie în formatul 'număr x număr' (exemplu: 10x10, 100x200, etc). Fara spatii sau alte caractere (doar cifre si x)."
-      )
-      return
-    }
 
     // Upload primary image
     const primaryImageFile = primaryImageFileRef.current.files[0]
@@ -85,7 +68,7 @@ export default function PaintForm() {
     if (primaryImageFile) {
       const formDataPrimary = new FormData()
       formDataPrimary.append("file", primaryImageFile)
-      formDataPrimary.append("sourcePage", "paintings") // Specify the source page
+      formDataPrimary.append("sourcePage", "piata") // Specify the source page
       try {
         const primaryImageResponse = await fetch("/api/s3-upload", {
           method: "POST",
@@ -112,7 +95,7 @@ export default function PaintForm() {
         if (!file) return null
         const formDataSub = new FormData()
         formDataSub.append("file", file)
-        formDataSub.append("sourcePage", "paintings") // Specify the source page for each sub-image
+        formDataSub.append("sourcePage", "piata") // Specify the source page for each sub-image
         try {
           const subImageResponse = await fetch("/api/s3-upload", {
             method: "POST",
@@ -128,26 +111,25 @@ export default function PaintForm() {
     )
 
     const subImageUrls = await Promise.all(subImageUploadPromises)
-
-    // Filter out any null values in case there were upload errors
     const filteredSubImageUrls = subImageUrls.filter(url => url !== null)
 
     // Construct form data with updated image URLs
     const formData = {
-      painter,
+      nume,
+      prenume,
       primaryImage: primaryImageUrl,
       subImages: filteredSubImageUrls,
       title,
       description,
-      size,
-      price,
+      price, // Ensure price is correctly formatted as a number
       email,
       phoneNumber,
     }
 
-    // Submit form data
+    // Submit form data to your API
     try {
-      const response = await fetch("/api/insert-expozitie", {
+      const response = await fetch("/api/insert-piata", {
+        // Ensure this endpoint matches your API for inserting products
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -159,14 +141,11 @@ export default function PaintForm() {
         const result = await response.json()
         setError(result.message)
         console.log(result.message)
-        // Optionally reset the form or provide user feedback
       } else {
         console.error("Error:", response.statusText)
-        // Handle HTTP error responses
       }
     } catch (error) {
       console.error("Error:", error)
-      // Handle network errors
     } finally {
       setIsSubmitting(false)
     }
@@ -177,25 +156,38 @@ export default function PaintForm() {
       <ErrorMessageModal message={error} onClose={() => setError("")} />
       <div className="paintings-form">
         <form onSubmit={handleSubmit} style={{ marginTop: "150px" }}>
+          {/* Nume input */}
           <input
             type="text"
-            value={painter}
-            onChange={e => setPainter(e.target.value)}
-            placeholder="Pictor"
+            value={nume}
+            onChange={e => setNume(e.target.value)}
+            placeholder="Nume"
             required
           />
+          {/* Prenume input */}
+          <input
+            type="text"
+            value={prenume}
+            onChange={e => setPrenume(e.target.value)}
+            placeholder="Prenume"
+            required
+          />
+
+          {/* Primary Image Upload */}
           <label className="file-label" style={{ marginBottom: "20px" }}>
             {primaryImageFileName
               ? `Imagine selectată: ${primaryImageFileName}`
-              : "Imaginea principală a picturii"}
+              : "Imaginea principală"}
             <input
               type="file"
               className="file-input"
               ref={primaryImageFileRef}
               onChange={handlePrimaryImageChange}
+              required
             />
           </label>
 
+          {/* Sub Images Upload */}
           {subImages.map((_, index) => (
             <label
               className="file-label"
@@ -214,9 +206,10 @@ export default function PaintForm() {
           ))}
 
           <button type="button" onClick={handleAddSubImage}>
-            Adauga imagini adiacente
+            Adaugă imagine adiacentă
           </button>
 
+          {/* Title input */}
           <input
             type="text"
             value={title}
@@ -224,19 +217,16 @@ export default function PaintForm() {
             placeholder="Titlu"
             required
           />
+
+          {/* Description textarea */}
           <textarea
             value={description}
             onChange={e => setDescription(e.target.value)}
             placeholder="Descriere"
             required
           ></textarea>
-          <input
-            type="text"
-            value={size}
-            onChange={e => setSize(e.target.value)}
-            placeholder="Dimensiune"
-            required
-          />
+
+          {/* Price input */}
           <input
             type="number"
             value={price}
@@ -245,6 +235,7 @@ export default function PaintForm() {
             required
           />
 
+          {/* Email input */}
           <input
             type="email"
             value={email}
@@ -253,6 +244,7 @@ export default function PaintForm() {
             required
           />
 
+          {/* Phone Number input */}
           <input
             type="tel"
             value={phoneNumber}
@@ -278,7 +270,7 @@ export default function PaintForm() {
             Am fost informat privind prelucrarea datelor personale.
           </label>
 
-          <button type="submit" disabled={isSubmitting}>
+          <button type="submit" style={{ display: "block" }}>
             Trimite
           </button>
         </form>
