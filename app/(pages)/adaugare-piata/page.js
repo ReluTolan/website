@@ -23,6 +23,11 @@ export default function ProductForm() {
   const primaryImageFileRef = useRef(null)
   const subImageFileRefs = useRef([])
 
+  const setErrorWithReset = newError => {
+    setError("")
+    setTimeout(() => setError(newError), 0)
+  }
+
   const handlePrimaryImageChange = e => {
     const file = e.target.files[0]
     if (file) {
@@ -55,15 +60,27 @@ export default function ProductForm() {
   }
 
   const handleSubmit = async e => {
+    if (isSubmitting) return
     e.preventDefault()
     setIsSubmitting(true)
+    setError("")
+
+    if (!termsAccepted || !dataProcessingAccepted) {
+      setErrorWithReset(
+        "Pentru a trimite formularul, trebuie sa fiti de acord cu termenii si conditiile si cu prelucrarea datelor."
+      )
+      setIsSubmitting(false)
+      return
+    }
 
     // Upload primary image
     const primaryImageFile = primaryImageFileRef.current.files[0]
     if (!primaryImageFile) {
-      setError("Trebuie sa selectezi imaginea de baza.")
+      setErrorWithReset("Trebuie sa selectezi imaginea de baza.")
+      setIsSubmitting(false)
       return
     }
+
     let primaryImageUrl = ""
     if (primaryImageFile) {
       const formDataPrimary = new FormData()
@@ -270,8 +287,14 @@ export default function ProductForm() {
             Am fost informat privind prelucrarea datelor personale.
           </label>
 
-          <button type="submit" style={{ display: "block" }}>
-            Trimite
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            style={{ display: "block" }}
+          >
+            {isSubmitting
+              ? "In acest moment formularul se trimite."
+              : "Trimite"}
           </button>
         </form>
       </div>

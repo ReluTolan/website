@@ -78,7 +78,18 @@ const ImageDetails = ({ params }) => {
         layout="responsive"
         onClick={() => handleImageClick(painting.primary_image)}
       />
-
+      <p>
+        <b>Pictor: </b>
+        {painting.painter}
+      </p>
+      <p>
+        <b>Email: </b>
+        {painting.email}
+      </p>
+      <p>
+        <b>Telefon: </b>
+        {painting.phone_number}
+      </p>
       {isEditing ? (
         <div>
           <input
@@ -89,14 +100,18 @@ const ImageDetails = ({ params }) => {
           <button onClick={handleSaveClick}>Save</button>
         </div>
       ) : (
-        <p style={{ width: "700px" }}>
+        <p>
           {painting.description}
           <button onClick={handleEditClick}>Edit</button>
         </p>
       )}
 
-      <p>Size: {painting.size}</p>
-      <p>Price: {painting.price}</p>
+      <p>
+        <b>Dimensiune:</b> {painting.size}
+      </p>
+      <p>
+        <b>Pret:</b> {painting.price} lei
+      </p>
 
       <div className="Id-big-cont">
         {painting.sub_images.map((img, index) => (

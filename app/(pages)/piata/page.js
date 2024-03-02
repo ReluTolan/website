@@ -28,8 +28,8 @@ const ProductPage = () => {
     const newFilteredProducts = allProducts.filter(product => {
       return (
         searchTerm === "" ||
-        product.titlu.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.descriere.toLowerCase().includes(searchTerm.toLowerCase())
+        product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchTerm.toLowerCase())
       )
     })
 

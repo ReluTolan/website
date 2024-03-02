@@ -7,8 +7,9 @@ import Link from "next/link"
 
 const ImageDetails = ({ params }) => {
   const [data, setData] = useState([])
-  // Create a state variable to keep track of the currently selected image
   const [selectedImage, setSelectedImage] = useState(null)
+  const [isEditing, setIsEditing] = useState(false)
+  const [newDescription, setNewDescription] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +26,38 @@ const ImageDetails = ({ params }) => {
   }, [])
 
   const painting = data.find(p => p.id == params.id)
+
+  const handleEditClick = () => {
+    setNewDescription(painting.description)
+    setIsEditing(true)
+  }
+
+  const handleSaveClick = async () => {
+    try {
+      const response = await fetch(
+        `/api/update-piata-description/${painting.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ description: newDescription }),
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error("Failed to update description")
+      }
+
+      const updatedPainting = await response.json()
+      setData(
+        data.map(p => (p.id === updatedPainting.id ? updatedPainting : p))
+      )
+      setIsEditing(false)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   if (!painting) {
     return <p>No painting found with id {params.id}</p>
@@ -48,9 +81,35 @@ const ImageDetails = ({ params }) => {
         layout="responsive"
         onClick={() => handleImageClick(painting.primary_image)}
       />
-      <p>{painting.prenume}</p>
-      <p>{painting.description}</p>
-      <p>Price: {painting.price}</p>
+      <p>
+        <b>Nume vanzator:</b> {painting.prenume}
+      </p>
+      <p>
+        <b>Email:</b> {painting.email}
+      </p>
+      <p>
+        <b>Telefon:</b> {painting.phone}
+      </p>
+      {isEditing ? (
+        <div>
+          <input
+            type="text"
+            value={newDescription}
+            onChange={e => setNewDescription(e.target.value)}
+          />
+          <button onClick={handleSaveClick}>Save</button>
+        </div>
+      ) : (
+        <p>
+          {painting.description}
+          <button onClick={handleEditClick}>Edit</button>
+        </p>
+      )}
+
+      <p>
+        <b>Pret:</b> {painting.price} lei
+      </p>
+
       <div className="Id-big-cont">
         {painting.sub_images.map((img, index) => (
           <Image

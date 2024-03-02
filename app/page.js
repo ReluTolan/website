@@ -6,8 +6,11 @@ export default function Home() {
     <>
       <main>
         <div className="hero">
-          <h1 className="hero-title">Titlul website-ului</h1>
-          <p className="hero-subtitle">Bine ati venit</p>
+          <div className="hero-border">
+            <h1 className="hero-title">Art Step</h1>
+            <p className="hero-subtitle">Bine ati venit</p>
+          </div>
+
           <button className="hero-cta">Despre noi</button>
         </div>
         <div className="section">

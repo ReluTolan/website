@@ -23,6 +23,11 @@ export default function PaintForm() {
   const primaryImageFileRef = useRef(null)
   const subImageFileRefs = useRef([])
 
+  const setErrorWithReset = newError => {
+    setError("")
+    setTimeout(() => setError(newError), 0)
+  }
+
   const handlePrimaryImageChange = e => {
     const file = e.target.files[0]
     if (file) {
@@ -58,27 +63,32 @@ export default function PaintForm() {
   // Handle form submission
   const handleSubmit = async e => {
     e.preventDefault()
+    if (isSubmitting) return
     setIsSubmitting(true)
+    setError("")
 
     if (!termsAccepted || !dataProcessingAccepted) {
-      setError(
+      setErrorWithReset(
         "Pentru a trimite formularul, trebuie sa fiti de acord cu termenii si conditiile si cu prelucrarea datelor."
       )
+      setIsSubmitting(false)
       return
     }
 
     const sizeRegex = /^\d+x\d+$/
     if (!sizeRegex.test(size)) {
-      setError(
-        "Dimensiunea trebuie să fie în formatul 'număr x număr' (exemplu: 10x10, 100x200, etc). Fara spatii sau alte caractere (doar cifre si x)."
+      setErrorWithReset(
+        "Dimensiunea trebuie să fie în formatul 'număr x număr'."
       )
+      setIsSubmitting(false)
       return
     }
 
     // Upload primary image
     const primaryImageFile = primaryImageFileRef.current.files[0]
     if (!primaryImageFile) {
-      setError("Trebuie sa selectezi imaginea de baza.")
+      setErrorWithReset("Trebuie sa selectezi imaginea de baza.")
+      setIsSubmitting(false)
       return
     }
     let primaryImageUrl = ""
@@ -278,8 +288,14 @@ export default function PaintForm() {
             Am fost informat privind prelucrarea datelor personale.
           </label>
 
-          <button type="submit" disabled={isSubmitting}>
-            Trimite
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            style={{ display: "block" }}
+          >
+            {isSubmitting
+              ? "In acest moment formularul se trimite."
+              : "Trimite"}
           </button>
         </form>
       </div>
