@@ -8,9 +8,11 @@ const nextConfig = {
         port: "",
       },
     ],
-    domains: ["relu-stepan.s3.eu-north-1.amazonaws.com"], // Add your S3 bucket here
+    domains: [
+      "relu-stepan.s3.eu-north-1.amazonaws.com",
+      "relu-stepan2.s3.eu-central-1.amazonaws.com",
+    ],
   },
-  // ... other configurations
 }
 
 export default nextConfig
