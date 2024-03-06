@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.515.0",
+    "@vercel/analytics": "^1.2.2",
     "@vercel/blob": "^0.22.1",
     "@vercel/postgres": "^0.7.2",
     "mime-types": "^2.1.35",

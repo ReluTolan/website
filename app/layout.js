@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google"
-import Link from "next/link"
+import { Analytics } from "@vercel/analytics/react"
 import "./globals.css"
 import Navbar from "./components/Navbar"
 
@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Navbar />
         {children}
+        <Analytics />
       </body>
     </html>
   )
