@@ -7,10 +7,16 @@ const nextConfig = {
         hostname: "vak6daptpt15cuhf.public.blob.vercel-storage.com",
         port: "",
       },
-    ],
-    domains: [
-      "relu-stepan.s3.eu-north-1.amazonaws.com",
-      "relu-stepan2.s3.eu-central-1.amazonaws.com",
+      {
+        protocol: "https",
+        hostname: "relu-stepan.s3.eu-north-1.amazonaws.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "relu-stepan2.s3.eu-central-1.amazonaws.com",
+        port: "",
+      },
     ],
   },
 }

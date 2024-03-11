@@ -60,6 +60,14 @@
   font-style: italic;
 }
 
+.painter-buttons {
+  padding: 10px;
+  background-color: #222;
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 800;
+}
+
 /* Sidebar */
 
 .sidebar {

@@ -1,9 +1,10 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import ImagePainting from "@/app/components/expozitie/ImagePainting" // Consider renaming based on usage
+import ImagePainting from "@/app/components/expozitie/ImagePainting"
 import Sidebar from "@/app/components/expozitie/SidebarPiata"
 import Link from "next/link"
+import "@/app/(pages)/page-styles.css"
 
 const ProductPage = () => {
   const [searchTerm, setSearchTerm] = useState("")
@@ -40,7 +41,10 @@ const ProductPage = () => {
     <>
       <Sidebar onSearchChange={setSearchTerm} />
       <div style={{ marginTop: "100px" }}>
-        <button style={{ display: "block", marginLeft: "45%" }}>
+        <button
+          style={{ display: "block", marginLeft: "45%" }}
+          className="painter-buttons"
+        >
           <Link href="/adaugare-piata">Adaugare</Link>
         </button>
         {/* Adjusted margin */}
