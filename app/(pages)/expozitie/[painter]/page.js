@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import ImagePainting from "@/app/components/expozitie/ImagePainting"
 import Sidebar from "@/app/components/expozitie/Sidebar"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 const getSizeCategory = sizeCm => {
   const [width, height] = sizeCm.split("x").map(Number)
@@ -22,6 +23,11 @@ const PainterPage = () => {
   const [allPaintings, setAllPaintings] = useState([])
   const [painters, setPainters] = useState([])
   const [availability, setAvailability] = useState("")
+
+  const router = useRouter()
+  const handleRefresh = () => {
+    router.refresh("/expozitie/pictori")
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -109,6 +115,9 @@ const PainterPage = () => {
           <button onClick={() => setAvailability("indisponibile")}>
             Indisponibile
           </button>
+        </div>
+        <div>
+          <button onClick={handleRefresh}>Refresh</button>
         </div>
 
         {filteredPaintings.length > 0 ? (

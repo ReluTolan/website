@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/react"
+import CookieConsent from "./components/Cookies"
 import "./globals.css"
 import Navbar from "./components/Navbar"
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <Analytics />
+        <CookieConsent />
       </body>
     </html>
   )
