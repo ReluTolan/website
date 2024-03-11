@@ -5,15 +5,8 @@ import { NextResponse } from "next/server"
 export async function GET() {
   try {
     const result = await client.sql`SELECT * FROM paintings;`
-    const response = new NextResponse()
-    response.body = result.rows
-    response.headers.set("Cache-Control", "s-maxage=0, stale-while-revalidate")
-    return response
+    return NextResponse.json(result.rows)
   } catch (error) {
-    const response = new NextResponse()
-    response.body = { error: error.message }
-    response.status = 500
-    response.headers.set("Cache-Control", "s-maxage=0, stale-while-revalidate")
-    return response
+    return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }
