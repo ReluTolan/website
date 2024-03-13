@@ -1,14 +1,20 @@
 import { db } from "@vercel/postgres"
+const client = await db.connect()
 import { NextResponse } from "next/server"
 
 export async function GET() {
-  const client = await db.connect()
   try {
     const result = await client.sql`SELECT * FROM paintings;`
-    return NextResponse.json(result.rows)
+    // Add cache-control header to disable caching
+    const response = NextResponse.json(result.rows)
+    response.headers.set("Cache-Control", "no-store")
+    return response
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
-  } finally {
-    await client.end()
+    const response = NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    )
+    response.headers.set("Cache-Control", "no-store")
+    return response
   }
 }
