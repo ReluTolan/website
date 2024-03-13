@@ -28,7 +28,7 @@ const PainterPage = () => {
     const fetchData = async () => {
       try {
         const response = await fetch("/api/query-db-expozitie", {
-          cache: "no-store",
+          method: "GET",
         })
         const data = await response.json()
         setAllPaintings(data)
