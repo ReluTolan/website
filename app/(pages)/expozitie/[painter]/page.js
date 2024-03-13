@@ -27,7 +27,7 @@ const PainterPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/query-db-expozitie", {
+        const response = await fetch(`/api/query-db-expozitie?${Date.now()}`, {
           method: "GET",
         })
         const data = await response.json()
