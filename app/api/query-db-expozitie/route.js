@@ -1,10 +1,11 @@
 import { db } from "@vercel/postgres"
 const client = await db.connect()
+import { sql } from "@vercel/postgres"
 import { NextResponse } from "next/server"
 
 export async function GET() {
   try {
-    const result = await client.sql`SELECT * FROM paintings;`
+    const result = await sql`SELECT * FROM paintings;`
     // Add cache-control header to disable caching
     const response = NextResponse.json(result.rows)
     response.headers.set("Cache-Control", "no-store")
