@@ -30,7 +30,7 @@ export async function DELETE(request, { params }) {
     await Promise.all(
       allImages.map(async image => {
         const key = image.replace(
-          "https://relu-stepan.s3.eu-north-1.amazonaws.com/",
+          "https://relu-stepan2.s3.eu-central-1.amazonaws.com/",
           ""
         )
         const deleteParams = {

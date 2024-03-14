@@ -1,12 +1,15 @@
 import { db } from "@vercel/postgres"
 const client = await db.connect()
+import { sql } from "@vercel/postgres"
 import { NextResponse } from "next/server"
 
-export async function GET() {
+export async function POST() {
   try {
-    const result = await client.sql`SELECT * FROM piata;`
-    return NextResponse.json(result.rows)
+    const result = await sql`SELECT * FROM piata;`
+    const response = NextResponse.json(result.rows)
+    return response
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    const response = NextResponse.json({ error: error.message })
+    return response
   }
 }

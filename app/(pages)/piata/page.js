@@ -14,7 +14,13 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/query-db-piata")
+        const response = await fetch("/api/query-db-piata", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        })
         const data = await response.json()
         setAllProducts(data)
       } catch (error) {

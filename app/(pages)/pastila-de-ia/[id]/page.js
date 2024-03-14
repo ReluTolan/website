@@ -8,7 +8,13 @@ const Page = ({ params }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/query-db-pastila")
+        const response = await fetch("/api/query-db-pastila", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        })
         const data = await response.json()
         setData(data)
       } catch (error) {
