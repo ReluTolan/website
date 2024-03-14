@@ -27,8 +27,16 @@ const PainterPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/api/query-db-expozitie?${Date.now()}`, {
-          method: "GET",
+        // Using POST method instead of GET
+        const response = await fetch(`/api/query-db-expozitie`, {
+          method: "POST", // Specify the method to POST
+          headers: {
+            "Content-Type": "application/json",
+            // Additional headers can be included if necessary
+          },
+          // If you need to send any data in the future, include it in the body
+          // For now, an empty object is sufficient to switch to POST
+          body: JSON.stringify({}),
         })
         const data = await response.json()
         setAllPaintings(data)
