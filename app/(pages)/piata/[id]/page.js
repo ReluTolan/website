@@ -14,7 +14,13 @@ const ImageDetails = ({ params }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/query-db-piata")
+        const response = await fetch("/api/query-db-piata", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        })
         const data = await response.json()
         setData(data)
       } catch (error) {
