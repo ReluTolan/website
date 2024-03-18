@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from "react"
+import Link from "next/link"
 
 function CookieConsent() {
   const [showConsent, setShowConsent] = useState(false)
@@ -33,7 +34,20 @@ function CookieConsent() {
     >
       <p>
         We use cookies to improve your experience. By using our site, you agree
-        to our use of cookies.
+        to our use of{" "}
+        <Link
+          href="/acord-de-prelucrare"
+          style={{ textDecoration: "underline" }}
+        >
+          data processing
+        </Link>{" "}
+        and{" "}
+        <Link
+          href="termeni-si-conditii"
+          style={{ textDecoration: "underline" }}
+        >
+          terms and conditions.
+        </Link>
       </p>
       <button onClick={handleConsent}>I Understand</button>
     </div>

@@ -28,8 +28,8 @@ export default function Navbar() {
         </li>
 
         <li className="navbar-item">
-          <Link href="/contact" className="navbar-link">
-            Contact
+          <Link href="/cum-cumpar-vand" className="navbar-link">
+            Cum cumpar / cum vand
           </Link>
         </li>
         <li className="navbar-item">

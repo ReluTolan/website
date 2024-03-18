@@ -65,20 +65,20 @@ export default function Home() {
             <Link href="/" className="footer-link">
               Acasa
             </Link>
-            <Link href="/expozitie/Aurelia" className="footer-link">
+            <Link href="/expozitie/pictori" className="footer-link">
               Expozitie cu vanzare
             </Link>
-            <Link href="/constignatie" className="footer-link">
+            <Link href="/piata" className="footer-link">
               Piata de vechi
             </Link>
             <Link href="/istoria-artei" className="footer-link">
               Intrebari frecvente
             </Link>
-            <Link href="/noutati" className="footer-link">
+            <Link href="/termeni-si-conditii" className="footer-link">
               Termeni si conditii
             </Link>
-            <Link href="/noutati" className="footer-link">
-              Contact
+            <Link href="/acord-de-prelucrare" className="footer-link">
+              Acord de informare
             </Link>
             <Link href="/noutati" className="footer-link">
               Despre noi
