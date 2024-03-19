@@ -31,6 +31,7 @@
   text-align: center;
   width: 300px;
   margin-right: 50px;
+  margin-bottom: 25px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -38,13 +39,15 @@
 .Ip-frame {
   display: grid;
   place-items: center;
-  background-color: rgb(202, 210, 141);
+  background-color: rgb(50, 50, 50);
   border-radius: 20px;
+  border: 10px solid #000000;
 }
 
 .Ip-image {
   width: 250px;
-  height: 250px;
+  height: calc(250px * 1.5);
+
   display: flex; /* add this */
   align-items: center; /* add this */
   justify-content: center; /* add this */

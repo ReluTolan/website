@@ -106,10 +106,10 @@ const ImageDetails = ({ params }) => {
           <button onClick={handleSaveClick}>Save</button>
         </div>
       ) : (
-        <p>
+        <div style={{ whiteSpace: "pre-wrap" }}>
           {painting.description}
           <button onClick={handleEditClick}>Edit</button>
-        </p>
+        </div>
       )}
 
       <p>
@@ -120,18 +120,19 @@ const ImageDetails = ({ params }) => {
       </p>
 
       <div className="Id-big-cont">
-        {painting.sub_images.map((img, index) => (
-          <Image
-            key={index}
-            className="Id-big"
-            src={img}
-            alt={painting.title}
-            width={300}
-            height={300}
-            layout="responsive"
-            onClick={() => handleImageClick(img)}
-          />
-        ))}
+        {painting.sub_images &&
+          painting.sub_images.map((img, index) => (
+            <Image
+              key={index}
+              className="Id-big"
+              src={img}
+              alt={painting.title}
+              width={300}
+              height={300}
+              layout="responsive"
+              onClick={() => handleImageClick(img)}
+            />
+          ))}
       </div>
 
       {/* Display the modal with the selected image */}

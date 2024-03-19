@@ -79,8 +79,7 @@ function SubmitForm() {
         onChange={handleTitleChange}
         placeholder="Title"
       />
-      <input
-        type="text"
+      <textarea
         value={content}
         onChange={handleContentChange}
         placeholder="Content"

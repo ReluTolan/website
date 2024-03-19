@@ -12,9 +12,8 @@ const ImagePainting = ({
 }) => {
   return (
     <div className="Ip-container">
-      <p>{title}</p>
-
       <div className="Ip-frame">
+        <p style={{ marginTop: "10px" }}>{title}</p>
         <div className="Ip-image">
           <Image
             src={src}

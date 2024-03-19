@@ -67,6 +67,8 @@ export default function PaintForm() {
     setIsSubmitting(true)
     setError("")
 
+    const sanitizedPainter = painter.replace(/[^a-z0-9]/gi, "_").toLowerCase()
+
     if (!termsAccepted || !dataProcessingAccepted) {
       setErrorWithReset(
         "Pentru a trimite formularul, trebuie sa fiti de acord cu termenii si conditiile si cu prelucrarea datelor."
@@ -95,7 +97,7 @@ export default function PaintForm() {
     if (primaryImageFile) {
       const formDataPrimary = new FormData()
       formDataPrimary.append("file", primaryImageFile)
-      formDataPrimary.append("sourcePage", "paintings") // Specify the source page
+      formDataPrimary.append("sourcePage", sanitizedPainter) // Specify the source page
       try {
         const primaryImageResponse = await fetch("/api/s3-upload", {
           method: "POST",
@@ -122,7 +124,7 @@ export default function PaintForm() {
         if (!file) return null
         const formDataSub = new FormData()
         formDataSub.append("file", file)
-        formDataSub.append("sourcePage", "paintings") // Specify the source page for each sub-image
+        formDataSub.append("sourcePage", sanitizedPainter) // Specify the source page for each sub-image
         try {
           const subImageResponse = await fetch("/api/s3-upload", {
             method: "POST",

@@ -7,6 +7,8 @@ import Link from "next/link"
 import "@/app/(pages)/page-styles.css"
 
 const getSizeCategory = sizeCm => {
+  if (!sizeCm) return "unknown"
+
   const [width, height] = sizeCm.split("x").map(Number)
   const area = width * height
   if (area <= 2000) return "mic"
@@ -95,7 +97,7 @@ const PainterPage = () => {
   }, [price, searchTerm, size, allPaintings, selectedPainter, availability])
 
   return (
-    <>
+    <div style={{ textAlign: "center" }}>
       <Sidebar
         onSearchChange={setSearchTerm}
         onSizeChange={setSize}
@@ -104,17 +106,15 @@ const PainterPage = () => {
         onPainterChange={setSelectedPainter} // Handle painter selection
       />
       <div style={{ marginTop: "100px" }}>
-        <button
-          style={{ display: "block", marginLeft: "45%" }}
-          className="painter-buttons"
-        >
+        <button className="painter-buttons" style={{ marginBottom: "15px" }}>
           <Link href="/adaugare">Adaugare tablouri</Link>
         </button>
 
-        <div>
+        <div style={{ marginBottom: "15px" }}>
           <button
             onClick={() => setAvailability("disponibile")}
             className="painter-buttons"
+            style={{ marginRight: "10px" }}
           >
             Disponibile
           </button>
@@ -149,7 +149,7 @@ const PainterPage = () => {
           <p>No paintings to show.</p>
         )}
       </div>
-    </>
+    </div>
   )
 }
 
