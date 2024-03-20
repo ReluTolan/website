@@ -78,6 +78,10 @@ const PainterPage = () => {
           .includes("indisponib")
       }
 
+      if (!painting.title) {
+        return false // Skip this painting
+      }
+
       // Combine availability check with other filtering conditions
       return (
         (selectedPainter === "" || painting.painter === selectedPainter) &&
