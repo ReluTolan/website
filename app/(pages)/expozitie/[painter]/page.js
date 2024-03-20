@@ -79,7 +79,7 @@ const PainterPage = () => {
       }
 
       if (!painting.title) {
-        return false // Skip this painting
+        painting.title = ""
       }
 
       // Combine availability check with other filtering conditions

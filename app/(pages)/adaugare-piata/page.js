@@ -4,6 +4,11 @@ import React, { useState, useRef } from "react"
 import "../page-styles.css"
 import ErrorMessageModal from "@/app/components/ErrorModal"
 
+const sanitizeFolderName = (nume, prenume) => {
+  const folderName = `${nume}_${prenume}`.toLowerCase()
+  return folderName.replace(/[^a-z0-9_]/g, "")
+}
+
 export default function ProductForm() {
   const [nume, setNume] = useState("")
   const [prenume, setPrenume] = useState("")
@@ -72,6 +77,7 @@ export default function ProductForm() {
       setIsSubmitting(false)
       return
     }
+    const folderName = sanitizeFolderName(nume, prenume)
 
     // Upload primary image
     const primaryImageFile = primaryImageFileRef.current.files[0]
@@ -85,7 +91,7 @@ export default function ProductForm() {
     if (primaryImageFile) {
       const formDataPrimary = new FormData()
       formDataPrimary.append("file", primaryImageFile)
-      formDataPrimary.append("sourcePage", "piata") // Specify the source page
+      formDataPrimary.append("sourcePage", folderName) // Specify the source page
       try {
         const primaryImageResponse = await fetch("/api/s3-upload", {
           method: "POST",
@@ -112,7 +118,7 @@ export default function ProductForm() {
         if (!file) return null
         const formDataSub = new FormData()
         formDataSub.append("file", file)
-        formDataSub.append("sourcePage", "piata") // Specify the source page for each sub-image
+        formDataSub.append("sourcePage", folderName) // Specify the source page for each sub-image
         try {
           const subImageResponse = await fetch("/api/s3-upload", {
             method: "POST",
