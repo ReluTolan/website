@@ -35,7 +35,9 @@ const Page = ({ params }) => {
     <div className="pastila-focus" style={{ marginTop: "100px" }}>
       <img src={pastila.image} alt="" />
       <h1>{pastila.title}</h1>
-      <div style={{ whiteSpace: "pre-wrap" }}>{pastila.content}</div>
+      <div style={{ whiteSpace: "pre-wrap", width: "90%", margin: "auto" }}>
+        {pastila.content}
+      </div>
     </div>
   )
 }

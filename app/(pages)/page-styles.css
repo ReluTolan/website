@@ -68,14 +68,15 @@
   background-color: #222;
   color: #fff;
   border-radius: 10px;
-  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 2px;
 }
 
 /* Sidebar */
 
 .sidebar {
   height: calc(100vh - 90px);
-  width: 250px;
+  width: 150px;
   position: fixed;
   top: 90px;
   left: 0;
@@ -88,12 +89,6 @@
 
 .sidebar-relative {
   position: relative;
-}
-
-.sidebar h4 {
-  margin-bottom: 10px;
-  color: #ecf0f1; /* same color as the text for consistency */
-  font-weight: 600; /* make the headers a bit bolder */
 }
 
 .sidebar input[type="text"],
@@ -124,12 +119,12 @@
   color: #ecf0f1; /* same color as the text for consistency */
 }
 
-.sidebar h4 {
+.sidebar p {
   border: 2px solid black;
   background-color: #6085c1;
   border-radius: 5px;
   padding-left: 10px;
-  font-size: 20px;
+  font-size: 15px;
   margin: 20px 0px;
 }
 /* Sidebar Animation */
@@ -255,7 +250,7 @@ h3 {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -276,14 +271,29 @@ h3 {
   color: #f1f1f1;
   font-size: 40px;
   font-weight: bold;
-  transition: 0.3s;
+  cursor: pointer;
 }
 
-.close:hover,
-.close:focus {
-  color: #bbb;
-  text-decoration: none;
+.cycle {
+  z-index: 120;
+  position: absolute;
+  top: 50%;
+  color: #000000;
+  font-size: 40px;
+  font-weight: bold;
   cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.cycle:nth-of-type(1) {
+  /* This is the Prev button */
+  left: 10px;
+}
+
+.cycle:nth-of-type(2) {
+  /* This is the Next button */
+  right: 10px;
 }
 
 /* Paintings Form */
@@ -361,11 +371,14 @@ textarea::placeholder {
 
 /* Pastila de ia */
 
-.pastila-focus {
+.pastila-focus h1 {
   text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
-
 .pastila-focus img {
+  display: block;
+  margin: auto;
   width: 800px;
 }
 

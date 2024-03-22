@@ -10,6 +10,7 @@ const ImageDetails = ({ params }) => {
   const [selectedImage, setSelectedImage] = useState(null)
   const [isEditing, setIsEditing] = useState(false)
   const [newDescription, setNewDescription] = useState("")
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,8 +64,24 @@ const ImageDetails = ({ params }) => {
   }
 
   // Handle the onClick event of an image
-  const handleImageClick = img => {
-    setSelectedImage(img)
+  const handleImageClick = (img, index) => {
+    setSelectedImageIndex(index)
+  }
+
+  const handlePrevClick = () => {
+    setSelectedImageIndex(
+      selectedImageIndex > 0
+        ? selectedImageIndex - 1
+        : painting.sub_images.length - 1
+    )
+  }
+
+  const handleNextClick = () => {
+    setSelectedImageIndex(
+      selectedImageIndex < painting.sub_images.length - 1
+        ? selectedImageIndex + 1
+        : 0
+    )
   }
 
   if (!painting) {
@@ -88,10 +105,12 @@ const ImageDetails = ({ params }) => {
         <b>Pictor: </b>
         {painting.painter}
       </p>
+      <p>Comenzi la:</p>
       <p>
         <b>Email: </b>
         {painting.email}
       </p>
+      <p>sau</p>
       <p>
         <b>Telefon: </b>
         {painting.phone_number}
@@ -115,7 +134,7 @@ const ImageDetails = ({ params }) => {
       <p>
         <b>Dimensiune:</b> {painting.size}
       </p>
-      <p>
+      <p style={{ fontSize: "50px", color: "red" }}>
         <b>Pret:</b> {painting.price} lei
       </p>
 
@@ -130,20 +149,26 @@ const ImageDetails = ({ params }) => {
               width={300}
               height={300}
               layout="responsive"
-              onClick={() => handleImageClick(img)}
+              onClick={() => handleImageClick(img, index)} // Pass the index to handleImageClick
             />
           ))}
       </div>
 
       {/* Display the modal with the selected image */}
-      {selectedImage && (
+      {selectedImageIndex !== null && (
         <div className="modal">
-          <span className="close" onClick={() => setSelectedImage(null)}>
+          <span className="close" onClick={() => setSelectedImageIndex(null)}>
             &times;
           </span>
+          <button className="cycle" onClick={handlePrevClick}>
+            Inapoi
+          </button>
+          <button className="cycle" onClick={handleNextClick}>
+            Inainte
+          </button>
           <Image
             className="modal-content"
-            src={selectedImage}
+            src={painting.sub_images[selectedImageIndex]} // Use selectedImageIndex to get the image
             alt={painting.title}
             layout="fill"
           />

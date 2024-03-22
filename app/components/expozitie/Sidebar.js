@@ -9,6 +9,7 @@ const Sidebar = ({
   onPriceChange,
   painters,
   onPainterChange,
+  selectedPainter,
 }) => {
   const [isOpen, setIsOpen] = useState(true)
 
@@ -23,10 +24,10 @@ const Sidebar = ({
 
         {/* Painters dropdown */}
         <div>
-          <h4>Pictor</h4>
+          <p>Pictor</p>
           <select
             onChange={event => onPainterChange(event.target.value)}
-            defaultValue=""
+            value={selectedPainter}
           >
             <option value="">Toti pictorii</option>
             {painters.map((painter, index) => (
@@ -38,7 +39,7 @@ const Sidebar = ({
         </div>
 
         <div>
-          <h4>Dimensiune</h4>
+          <p>Dimensiune</p>
           {/* Size options */}
           {["mic", "mediu", "mare"].map(sizeOption => (
             <label key={sizeOption}>
@@ -54,7 +55,7 @@ const Sidebar = ({
         </div>
 
         <div>
-          <h4>Pret</h4>
+          <p>Pret</p>
           {/* Price options */}
           {["0-1000", "1000-2000", "2000-3500", "3500+"].map(priceRange => (
             <label key={priceRange}>

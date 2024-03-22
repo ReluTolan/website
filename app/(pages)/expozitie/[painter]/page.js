@@ -20,11 +20,11 @@ const PainterPage = () => {
   const [searchTerm, setSearchTerm] = useState("")
   const [size, setSize] = useState("")
   const [price, setPrice] = useState("")
-  const [selectedPainter, setSelectedPainter] = useState("")
+  const [selectedPainter, setSelectedPainter] = useState("Aurelia Stepan")
   const [filteredPaintings, setFilteredPaintings] = useState([])
   const [allPaintings, setAllPaintings] = useState([])
   const [painters, setPainters] = useState([])
-  const [availability, setAvailability] = useState("")
+  const [availability, setAvailability] = useState("disponibile")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -101,17 +101,18 @@ const PainterPage = () => {
   }, [price, searchTerm, size, allPaintings, selectedPainter, availability])
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center", marginLeft: "160px" }}>
       <Sidebar
         onSearchChange={setSearchTerm}
         onSizeChange={setSize}
         onPriceChange={setPrice}
-        painters={painters} // Pass painters to Sidebar
-        onPainterChange={setSelectedPainter} // Handle painter selection
+        painters={painters}
+        onPainterChange={setSelectedPainter}
+        selectedPainter={selectedPainter} // default painter when the page loads (Aurelia Stepan)
       />
       <div style={{ marginTop: "100px" }}>
         <button className="painter-buttons" style={{ marginBottom: "15px" }}>
-          <Link href="/adaugare">Adaugare tablouri</Link>
+          <Link href="/adaugare">Adăugare creații artistice</Link>
         </button>
 
         <div style={{ marginBottom: "15px" }}>
@@ -126,7 +127,7 @@ const PainterPage = () => {
             onClick={() => setAvailability("indisponibile")}
             className="painter-buttons"
           >
-            Indisponibile
+            Vândute
           </button>
         </div>
 

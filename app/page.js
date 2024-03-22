@@ -71,9 +71,6 @@ export default function Home() {
             <Link href="/piata" className="footer-link">
               Piata de vechi
             </Link>
-            <Link href="/istoria-artei" className="footer-link">
-              Intrebari frecvente
-            </Link>
             <Link href="/termeni-si-conditii" className="footer-link">
               Termeni si conditii
             </Link>
@@ -84,7 +81,7 @@ export default function Home() {
               Despre noi
             </Link>
           </div>
-          <p className="footer-text">© 2024 Relu Tolan</p>
+          <p className="footer-text">© 2024 ArtStep</p>
         </div>
       </footer>
     </>
