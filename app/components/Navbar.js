@@ -16,7 +16,7 @@ export default function Navbar() {
           </Link>
         </li>
         <li className="navbar-item">
-          <Link href="/expozitie/pictori" className="navbar-link">
+          <Link href="/expozitie/artisti" className="navbar-link">
             Expozitie cu vanzare
           </Link>
         </li>

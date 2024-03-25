@@ -1,4 +1,5 @@
 import "@/app/(pages)/page-styles.css"
+import Link from "next/link"
 
 export default function CumCumparVand() {
   return (
@@ -47,7 +48,11 @@ export default function CumCumparVand() {
       <h1 className="cum-title">Cum vând?</h1>
       <p className="cum-subtitle">Nimic mai simplu!</p>
 
-      <h2 className="cum-section-title">SECȚIUNEA "EXPOZIȚIE CU VÂNZARE"</h2>
+      <h2 className="cum-section-title">
+        <Link href={"/expozitie/artisti"}>
+          SECȚIUNEA "EXPOZIȚIE CU VÂNZARE"
+        </Link>
+      </h2>
       <p style={{ marginBottom: "20px" }}>
         Dacă ești artist plastic, ArtStep îți oferă posibilitatea să-ți
         promovezi gratuit lucrările (de ex.: tablouri, sculpturi, modelaje,
@@ -72,7 +77,9 @@ export default function CumCumparVand() {
         Îți dorim succes și negocieri cu folos!
       </p>
 
-      <h2 className="cum-section-title">SECȚIUNEA "PIAȚA DE VECHI"</h2>
+      <h2 className="cum-section-title">
+        <Link href={"/piata"}>SECȚIUNEA "PIAȚA DE VECHI"</Link>
+      </h2>
       <p style={{ marginBottom: "20px" }}>
         Dacă ești posesorul legitim al unui obiect de artă plastică, artizanat,
         anticariat, decorațiuni, obiecte vechi recondiționate sau

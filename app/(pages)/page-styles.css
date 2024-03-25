@@ -484,3 +484,44 @@ textarea::placeholder {
   margin-bottom: 1em;
   text-align: justify;
 }
+
+/* DESPRE NOI */
+.despre-noi {
+  max-width: 90%;
+  margin: auto;
+}
+
+.despre-noi h1 {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.despre-noi div {
+  position: relative;
+  padding: 40px;
+}
+
+.despre-noi div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/images/despre-noi.webp");
+  background-size: cover;
+  opacity: 0.5;
+  z-index: -1;
+  border-radius: 16%;
+}
+
+.despre-noi p {
+  font-size: 15px;
+  line-height: 1.6;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: rgba(199, 199, 199, 0.5);
+  border-radius: 20px;
+  font-weight: 600;
+}

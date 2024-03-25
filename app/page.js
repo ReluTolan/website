@@ -10,51 +10,76 @@ export default function Home() {
             <div className="hero-border"></div>
           </Link>
           <p className="hero-subtitle">Bine ati venit</p>
-          <button className="hero-cta">Despre noi</button>
+          <button className="hero-cta">
+            <Link href={"/despre-noi"}>Despre noi</Link>
+          </button>
         </div>
         <div className="section">
-          <h2 className="section-header" style={{ color: "white" }}>
+          <h1
+            className="section-header"
+            style={{ color: "white", marginBottom: "15px" }}
+          >
             Despre ArtStep
-          </h2>
+          </h1>
+          <p style={{ color: "white" }}>
+            ArtStep este o platformă de promovare gratuită, în special a
+            artiștilor plastici amatori sau profesioniști, dar și a
+            deținătorilor legitimi de obiecte de artă, artizanat, anticariat,
+            decor, mobilă veche, etc., care doresc să-și vândă creațiile /
+            obiectele contra unei sume corect evaluate, respectiv negociate.
+          </p>
+          <br />
+          <p style={{ color: "white" }}>
+            Ca atare, indiferent din ce categorie faceți parte, artist plastic,
+            colecționar, deținător legitim sau iubitor de obiecte de artă,
+            artizanat, anticariat, decor, mobilă veche, etc., aici veți găsi
+            ceea ce vă interesează, astfel:
+          </p>
           <div className="card">
-            <h1>Ce puteti vedea aici</h1>
+            <h3>Expoziție cu vânzare</h3>
             <p>
-              Aici puteți vedea o varietate de informații interesante și utile
-              despre locul nostru minunat. Cu ajutorul nostru, veți descoperi
-              frumusețea naturii, cultura locală bogată și opțiunile nelimitate
-              de divertisment. <br /> <br />
-              Indiferent dacă sunteți în căutarea aventurilor în aer liber sau
-              doriți să explorați atracțiile culturale, suntem aici pentru a vă
-              oferi informațiile de care aveți nevoie pentru a vă bucura la
-              maxim de călătoria dumneavoastră. <br />
-              <br />
-              Indiferent dacă sunteți pasionat de natură sau de artă, aici veți
-              găsi ceva care să vă fascineze. Puteți explora frumusețea
-              peisajelor naturale sau vă puteți pierde în lumea artei cu
-              colecția noastră impresionantă. În plus, avem numeroase evenimente
-              și activități planificate pentru a vă oferi o experiență
-              memorabilă. Haideți să începem călătoria împreună și să facem din
-              fiecare moment o aventură de neuitat!
-            </p>
-
-            <br />
-
-            <h1>Tipuri de picturi</h1>
-            <p>
-              În lumea artei, există o varietate de tipuri de picturi, fiecare
-              având propria sa frumusețe și semnificație. De la picturile
-              abstracte care vă invită să vă lăsați imaginația să zboare, până
-              la cele realiste care surprind fiecare detaliu cu precizie
-              uluitoare, există ceva pentru fiecare gust artistic. <br />
-              <br /> Descoperiți lumile vibrante și expresive create de artiști
-              talentați din întreaga lume. Fie că sunteți un iubitor al
-              impresionismului, al artei contemporane sau al picturilor clasice,
-              există multe de explorat și de apreciat în lumea picturilor.
-              Haideți să vă aventurați în această călătorie artistică și să vă
-              bucurați de diversitatea tipurilor de picturi care vă vor încânta
-              ochii și sufletul!
+              În secțiunea Expoziție cu vânzare veți găsi creațiile artiștilor,
+              amatori sau profesioniști, pe care îi veți putea contacta în mod
+              direct (folosind datele de contact afișate) în vederea
+              achiziționării creațiilor lor.
             </p>
           </div>
+          <div className="card">
+            <h3>Piața de vechi</h3>
+            <p>
+              În secțiunea Piața de vechi veți găsi obiecte de artă, artizanat,
+              anticariat, decor, mobilă veche, etc., pe care le veți putea
+              achiziționa, în urma unui proces de negociere directă cu
+              deținătorul lor legitim.
+            </p>
+          </div>
+          <div className="card">
+            <h3>Pastila de IA (inteligență artificială)</h3>
+            <p>
+              În secțiunea Pastila de IA (inteligență artificială) veți găsi
+              articole / tutoriale, generate de AI, cu tematică artistică.
+            </p>
+            <br />
+            <p style={{ fontStyle: "italic" }}>
+              Disclaimer: Din verificările noastre conținutul generat de IA și
+              publicat de noi este preponderent corect, dar nu recomandăm
+              folosirea acestui conținut sub nicio formă și pentru niciun
+              obiectiv, fără o verificare suplimentară și riguros documentată
+              istoric / științific.
+            </p>
+          </div>
+          <br />
+          <p style={{ color: "white" }}>
+            În concluzie, arta și ”frumosul” fiind un domeniu strict subiectiv,
+            fiecare creație / obiect având o frumusețe și semnificație
+            intrinsecă, vă încurajăm și vă recomandăm ferm să accesați /
+            achiziționați doar acele creațiile / obiecte cu care rezonați
+            artistic / emoțional. Doar în acest fel, scopul platformei ArtStep
+            de a uni deținătorul cu obiectul / creația artistică va fi
+            desăvârșit.
+          </p>
+          <br />
+          <p style={{ fontWeight: "bold" }}>Vă dorim ”navigare” plăcută!</p>
         </div>
       </main>
 
@@ -76,7 +101,7 @@ export default function Home() {
             <Link href="/acord-de-prelucrare" className="footer-link">
               Acord de informare
             </Link>
-            <Link href="/noutati" className="footer-link">
+            <Link href="/despre-noi" className="footer-link">
               Despre noi
             </Link>
           </div>

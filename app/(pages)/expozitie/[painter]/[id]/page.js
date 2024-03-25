@@ -4,13 +4,31 @@ import { useState, useEffect } from "react"
 //import { paintings } from "@/app/test-db/expuse"
 import Image from "next/image"
 import Link from "next/link"
+import "@/app/(pages)/page-styles.css"
 
 const ImageDetails = ({ params }) => {
   const [data, setData] = useState([])
   const [selectedImage, setSelectedImage] = useState(null)
   const [isEditing, setIsEditing] = useState(false)
   const [newDescription, setNewDescription] = useState("")
-  const [selectedImageIndex, setSelectedImageIndex] = useState(null)
+
+  useEffect(() => {
+    if (selectedImage) {
+      window.history.pushState(null, null, window.location.pathname)
+    }
+  }, [selectedImage])
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setSelectedImage(null)
+    }
+
+    window.addEventListener("popstate", handlePopState)
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState)
+    }
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,23 +82,33 @@ const ImageDetails = ({ params }) => {
   }
 
   // Handle the onClick event of an image
-  const handleImageClick = (img, index) => {
-    setSelectedImageIndex(index)
+  const handleImageClick = img => {
+    setSelectedImage(img)
   }
 
   const handlePrevClick = () => {
-    setSelectedImageIndex(
-      selectedImageIndex > 0
-        ? selectedImageIndex - 1
-        : painting.sub_images.length - 1
+    const currentIndex = [
+      painting.primary_image,
+      ...painting.sub_images,
+    ].indexOf(selectedImage)
+    setSelectedImage(
+      currentIndex > 0
+        ? [painting.primary_image, ...painting.sub_images][currentIndex - 1]
+        : [painting.primary_image, ...painting.sub_images][
+            painting.sub_images.length
+          ]
     )
   }
 
   const handleNextClick = () => {
-    setSelectedImageIndex(
-      selectedImageIndex < painting.sub_images.length - 1
-        ? selectedImageIndex + 1
-        : 0
+    const currentIndex = [
+      painting.primary_image,
+      ...painting.sub_images,
+    ].indexOf(selectedImage)
+    setSelectedImage(
+      currentIndex < painting.sub_images.length
+        ? [painting.primary_image, ...painting.sub_images][currentIndex + 1]
+        : painting.primary_image
     )
   }
 
@@ -155,9 +183,9 @@ const ImageDetails = ({ params }) => {
       </div>
 
       {/* Display the modal with the selected image */}
-      {selectedImageIndex !== null && (
+      {selectedImage && (
         <div className="modal">
-          <span className="close" onClick={() => setSelectedImageIndex(null)}>
+          <span className="close" onClick={() => setSelectedImage(null)}>
             &times;
           </span>
           <button className="cycle" onClick={handlePrevClick}>
@@ -168,15 +196,14 @@ const ImageDetails = ({ params }) => {
           </button>
           <Image
             className="modal-content"
-            src={painting.sub_images[selectedImageIndex]} // Use selectedImageIndex to get the image
+            src={selectedImage} // Use selectedImage to get the image
             alt={painting.title}
             layout="fill"
           />
         </div>
       )}
-
-      <button>
-        <Link href={`/delete-painting/${painting.id}`}>Delete admin</Link>
+      <button className="painter-buttons" style={{ marginTop: "20px" }}>
+        <Link href={`/delete-painting/${painting.id}`}>Sterge pagina</Link>
       </button>
     </div>
   )
