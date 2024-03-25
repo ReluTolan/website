@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react"
 import "../page-styles.css"
 import ErrorMessageModal from "@/app/components/ErrorModal"
+import Link from "next/link"
 
 export default function PaintForm() {
   const [painter, setPainter] = useState("")
@@ -272,24 +273,39 @@ export default function PaintForm() {
             placeholder="Număr de telefon"
             required
           />
-
           <label>
             <input
               type="checkbox"
               checked={termsAccepted}
               onChange={e => setTermsAccepted(e.target.checked)}
             />
-            Accept termenii si conditiile.
+            Accept
+            <Link
+              href="/termeni-si-conditii"
+              style={{ textDecoration: "underline" }}
+              target="_blank"
+            >
+              {" "}
+              termenii si conditiile.
+            </Link>
           </label>
+
           <label>
             <input
               type="checkbox"
               checked={dataProcessingAccepted}
               onChange={e => setDataProcessingAccepted(e.target.checked)}
             />
-            Am fost informat privind prelucrarea datelor personale.
+            Am fost informat privind{" "}
+            <Link
+              href={"/acord-de-prelucrare"}
+              style={{ textDecoration: "underline" }}
+              target="_blank"
+            >
+              {" "}
+              prelucrarea datelor personale.{" "}
+            </Link>
           </label>
-
           <button
             type="submit"
             disabled={isSubmitting}

@@ -24,12 +24,12 @@ const Sidebar = ({
 
         {/* Painters dropdown */}
         <div>
-          <p>Pictor</p>
+          <p>Artist</p>
           <select
             onChange={event => onPainterChange(event.target.value)}
             value={selectedPainter}
           >
-            <option value="">Toti pictorii</option>
+            <option value="">Toti artistii</option>
             {painters.map((painter, index) => (
               <option key={index} value={painter}>
                 {painter}

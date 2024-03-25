@@ -115,24 +115,27 @@ a {
 }
 
 .hero:hover {
-  transform: scale(1.02); /* Add this block */
+  transform: scale(1.02);
 }
 
 .hero-border {
-  border: #000000 5px solid;
-  padding: 20px;
+  background-image: url("/images/banner.png");
+  background-size: cover;
+  height: 300px;
+  width: 300px;
+  border-radius: 50px;
   background-color: #000000;
 }
 
 .hero-title {
   font-size: 40px; /* Adjust as needed */
-  color: #ffffff;
+  color: #64e04e;
   font-weight: 800;
 }
 
 .hero-subtitle {
   font-size: 30px; /* Adjust as needed */
-  color: #ffffff;
+  color: #64e04e;
   font-weight: 700;
 }
 
@@ -163,7 +166,7 @@ a {
 }
 
 .section {
-  background-color: #0f0f0f;
+  background-color: #6c6c6c;
   padding: 20px;
 }
 

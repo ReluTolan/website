@@ -6,16 +6,15 @@ export default function Home() {
     <>
       <main>
         <div className="hero">
-          <div className="hero-border">
-            <h1 className="hero-title">Art Step</h1>
-            <p className="hero-subtitle">Bine ati venit</p>
-          </div>
-
+          <Link href={"/expozitie/artisti"}>
+            <div className="hero-border"></div>
+          </Link>
+          <p className="hero-subtitle">Bine ati venit</p>
           <button className="hero-cta">Despre noi</button>
         </div>
         <div className="section">
           <h2 className="section-header" style={{ color: "white" }}>
-            Despre aplicatie
+            Despre ArtStep
           </h2>
           <div className="card">
             <h1>Ce puteti vedea aici</h1>

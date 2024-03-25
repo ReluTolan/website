@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import "@/app/(pages)/page-styles.css"
 
 const Page = () => {
   const [pastilas, setPastilas] = useState([])
@@ -28,15 +29,24 @@ const Page = () => {
 
   return (
     <>
-      <Link href={"/adaugare-pastila"}>
-        <button style={{ marginTop: "100px" }}>Adaugare admin</button>
-      </Link>
+      <div style={{ textAlign: "center" }}>
+        <Link href={"/adaugare-pastila"}>
+          <button className="painter-buttons" style={{ marginTop: "100px" }}>
+            Adaugare admin
+          </button>
+        </Link>
+        <h1 style={{ marginBottom: "50px" }}>
+          Consumul moderat de IA (inteligență artificială) îmbunătățește
+          calitatea vieții
+        </h1>
+      </div>
       {pastilas.map((pastila, index) => (
         <div
           key={index}
           style={{
             marginBottom: "10px",
             border: "2px solid black",
+            backgroundColor: "#f9f9f9",
           }}
         >
           <h1>{pastila.title}</h1>
