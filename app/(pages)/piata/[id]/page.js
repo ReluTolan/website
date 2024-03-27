@@ -1,15 +1,33 @@
 "use client"
 
 import { useState, useEffect } from "react"
-//import { paintings } from "@/app/test-db/expuse"
 import Image from "next/image"
 import Link from "next/link"
+import "@/app/(pages)/page-styles.css"
 
 const ImageDetails = ({ params }) => {
   const [data, setData] = useState([])
   const [selectedImage, setSelectedImage] = useState(null)
   const [isEditing, setIsEditing] = useState(false)
   const [newDescription, setNewDescription] = useState("")
+
+  useEffect(() => {
+    if (selectedImage) {
+      window.history.pushState(null, null, window.location.pathname)
+    }
+  }, [selectedImage])
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setSelectedImage(null)
+    }
+
+    window.addEventListener("popstate", handlePopState)
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState)
+    }
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,13 +83,39 @@ const ImageDetails = ({ params }) => {
     }
   }
 
-  if (!painting) {
-    return <p>No painting found with id {params.id}</p>
-  }
-
   // Handle the onClick event of an image
   const handleImageClick = img => {
     setSelectedImage(img)
+  }
+
+  const handlePrevClick = () => {
+    const currentIndex = [
+      painting.primary_image,
+      ...painting.sub_images,
+    ].indexOf(selectedImage)
+    setSelectedImage(
+      currentIndex > 0
+        ? [painting.primary_image, ...painting.sub_images][currentIndex - 1]
+        : [painting.primary_image, ...painting.sub_images][
+            painting.sub_images.length
+          ]
+    )
+  }
+
+  const handleNextClick = () => {
+    const currentIndex = [
+      painting.primary_image,
+      ...painting.sub_images,
+    ].indexOf(selectedImage)
+    setSelectedImage(
+      currentIndex < painting.sub_images.length
+        ? [painting.primary_image, ...painting.sub_images][currentIndex + 1]
+        : painting.primary_image
+    )
+  }
+
+  if (!painting) {
+    return <p>No painting found with id {params.id}</p>
   }
 
   // If a painting is found, display its details
@@ -112,23 +156,24 @@ const ImageDetails = ({ params }) => {
         </p>
       )}
 
-      <p>
+      <p style={{ fontSize: "50px", color: "red" }}>
         <b>Pret:</b> {painting.price} lei
       </p>
 
       <div className="Id-big-cont">
-        {painting.sub_images.map((img, index) => (
-          <Image
-            key={index}
-            className="Id-big"
-            src={img}
-            alt={painting.title}
-            width={300}
-            height={300}
-            layout="responsive"
-            onClick={() => handleImageClick(img)}
-          />
-        ))}
+        {painting.sub_images &&
+          painting.sub_images.map((img, index) => (
+            <Image
+              key={index}
+              className="Id-big"
+              src={img}
+              alt={painting.title}
+              width={300}
+              height={300}
+              layout="responsive"
+              onClick={() => handleImageClick(img, index)} // Pass the index to handleImageClick
+            />
+          ))}
       </div>
       {/* Display the modal with the selected image */}
       {selectedImage && (
@@ -136,17 +181,22 @@ const ImageDetails = ({ params }) => {
           <span className="close" onClick={() => setSelectedImage(null)}>
             &times;
           </span>
+          <button className="cycle" onClick={handlePrevClick}>
+            Inapoi
+          </button>
+          <button className="cycle" onClick={handleNextClick}>
+            Inainte
+          </button>
           <Image
             className="modal-content"
-            src={selectedImage}
+            src={selectedImage} // Use selectedImage to get the image
             alt={painting.title}
             layout="fill"
           />
         </div>
       )}
-
-      <button>
-        <Link href={`/delete-piata/${painting.id}`}>Delete admin</Link>
+      <button className="painter-buttons" style={{ marginTop: "20px" }}>
+        <Link href={`/delete-piata/${painting.id}`}>Sterge pagina</Link>
       </button>
     </div>
   )

@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-//import { paintings } from "@/app/test-db/expuse"
 import Image from "next/image"
 import Link from "next/link"
 import "@/app/(pages)/page-styles.css"
