@@ -10,6 +10,7 @@ const ProductPage = () => {
   const [searchTerm, setSearchTerm] = useState("")
   const [filteredProducts, setFilteredProducts] = useState([])
   const [allProducts, setAllProducts] = useState([])
+  const [sidebarOpen, setSidebarOpen] = useState(true) // Add state to track sidebar openness
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,16 +45,14 @@ const ProductPage = () => {
   }, [searchTerm, allProducts])
 
   return (
-    <>
+    <div className="Ip-align">
       <Sidebar onSearchChange={setSearchTerm} />
       <div style={{ marginTop: "100px" }}>
-        <button
-          style={{ display: "block", marginLeft: "45%" }}
-          className="painter-buttons"
-        >
-          <Link href="/adaugare-piata">Adaugare</Link>
-        </button>
-        {/* Adjusted margin */}
+        <div className="align-painter-buttons">
+          <button className="painter-buttons" style={{ marginBottom: "20px" }}>
+            <Link href="/adaugare-piata">Adaugare</Link>
+          </button>
+        </div>
 
         {filteredProducts.length > 0 ? (
           filteredProducts.map(product => (
@@ -73,7 +72,7 @@ const ProductPage = () => {
           <p>No products to show.</p>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

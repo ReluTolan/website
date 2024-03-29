@@ -5,36 +5,35 @@ export default function Home() {
   return (
     <>
       <main>
-        <div className="hero">
+        <div className="hero" style={{ marginTop: "90px" }}>
           <Link href={"/expozitie/artisti"}>
             <div className="hero-border"></div>
           </Link>
-          <p className="hero-subtitle">Bine ati venit</p>
-          <button className="hero-cta">
-            <Link href={"/despre-noi"}>Despre noi</Link>
-          </button>
+          {/* <div className="hero-text">
+            <p className="hero-subtitle">Bine ati venit</p>
+            <button className="hero-cta">
+              <Link href={"/despre-noi"}>Despre noi</Link>
+            </button>
+          </div> */}
         </div>
         <div className="section">
-          <h1
-            className="section-header"
-            style={{ color: "white", marginBottom: "15px" }}
-          >
-            Despre ArtStep
-          </h1>
-          <p style={{ color: "white" }}>
-            ArtStep este o platformă de promovare gratuită, în special a
-            artiștilor plastici amatori sau profesioniști, dar și a
-            deținătorilor legitimi de obiecte de artă, artizanat, anticariat,
-            decor, mobilă veche, etc., care doresc să-și vândă creațiile /
-            obiectele contra unei sume corect evaluate, respectiv negociate.
-          </p>
-          <br />
-          <p style={{ color: "white" }}>
-            Ca atare, indiferent din ce categorie faceți parte, artist plastic,
-            colecționar, deținător legitim sau iubitor de obiecte de artă,
-            artizanat, anticariat, decor, mobilă veche, etc., aici veți găsi
-            ceea ce vă interesează, astfel:
-          </p>
+          <h1 className={`section-header`}>Despre ArtStep</h1>
+          <div className="description">
+            <p>
+              ArtStep este o platformă de promovare gratuită, în special a
+              artiștilor plastici amatori sau profesioniști, dar și a
+              deținătorilor legitimi de obiecte de artă, artizanat, anticariat,
+              decor, mobilă veche, etc., care doresc să-și vândă creațiile /
+              obiectele contra unei sume corect evaluate, respectiv negociate.
+            </p>
+            <br />
+            <p>
+              Ca atare, indiferent din ce categorie faceți parte, artist
+              plastic, colecționar, deținător legitim sau iubitor de obiecte de
+              artă, artizanat, anticariat, decor, mobilă veche, etc., aici veți
+              găsi ceea ce vă interesează, astfel:
+            </p>
+          </div>
           <div className="card">
             <h3>Expoziție cu vânzare</h3>
             <p>
@@ -69,17 +68,19 @@ export default function Home() {
             </p>
           </div>
           <br />
-          <p style={{ color: "white" }}>
-            În concluzie, arta și ”frumosul” fiind un domeniu strict subiectiv,
-            fiecare creație / obiect având o frumusețe și semnificație
-            intrinsecă, vă încurajăm și vă recomandăm ferm să accesați /
-            achiziționați doar acele creațiile / obiecte cu care rezonați
-            artistic / emoțional. Doar în acest fel, scopul platformei ArtStep
-            de a uni deținătorul cu obiectul / creația artistică va fi
-            desăvârșit.
-          </p>
-          <br />
-          <p style={{ fontWeight: "bold" }}>Vă dorim ”navigare” plăcută!</p>
+          <div className="description">
+            <p>
+              În concluzie, arta și ”frumosul” fiind un domeniu strict
+              subiectiv, fiecare creație / obiect având o frumusețe și
+              semnificație intrinsecă, vă încurajăm și vă recomandăm ferm să
+              accesați / achiziționați doar acele creațiile / obiecte cu care
+              rezonați artistic / emoțional. Doar în acest fel, scopul
+              platformei ArtStep de a uni deținătorul cu obiectul / creația
+              artistică va fi desăvârșit.
+            </p>
+            <br />
+            <p style={{ fontWeight: "bold" }}>Vă dorim ”navigare” plăcută!</p>
+          </div>
         </div>
       </main>
 

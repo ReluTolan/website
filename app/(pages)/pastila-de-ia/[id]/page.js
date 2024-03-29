@@ -28,7 +28,7 @@ const Page = ({ params }) => {
   const pastila = data.find(p => p.id == params.id)
 
   if (!pastila) {
-    return <div style={{ marginTop: "100px" }}>Se incarca...</div> // or some other placeholder content
+    return <div style={{ marginTop: "100px" }}>Se incarca...</div>
   }
 
   return (

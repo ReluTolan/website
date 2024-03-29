@@ -101,7 +101,7 @@ const PainterPage = () => {
   }, [price, searchTerm, size, allPaintings, selectedPainter, availability])
 
   return (
-    <div style={{ textAlign: "center", marginLeft: "160px" }}>
+    <div className="Ip-align">
       <Sidebar
         onSearchChange={setSearchTerm}
         onSizeChange={setSize}
@@ -111,24 +111,26 @@ const PainterPage = () => {
         selectedPainter={selectedPainter} // default painter when the page loads (Aurelia Stepan)
       />
       <div style={{ marginTop: "100px" }}>
-        <button className="painter-buttons" style={{ marginBottom: "15px" }}>
-          <Link href="/adaugare">Adăugare creații artistice</Link>
-        </button>
+        <div className="align-painter-buttons">
+          <button className="painter-buttons" style={{ marginBottom: "15px" }}>
+            <Link href="/adaugare">Adăugare creații artistice</Link>
+          </button>
 
-        <div style={{ marginBottom: "15px" }}>
-          <button
-            onClick={() => setAvailability("disponibile")}
-            className="painter-buttons"
-            style={{ marginRight: "10px" }}
-          >
-            Disponibile
-          </button>
-          <button
-            onClick={() => setAvailability("indisponibile")}
-            className="painter-buttons"
-          >
-            Vândute
-          </button>
+          <div style={{ marginBottom: "15px" }}>
+            <button
+              onClick={() => setAvailability("disponibile")}
+              className="painter-buttons"
+              style={{ marginRight: "10px" }}
+            >
+              Disponibile
+            </button>
+            <button
+              onClick={() => setAvailability("indisponibile")}
+              className="painter-buttons"
+            >
+              Vândute
+            </button>
+          </div>
         </div>
 
         {filteredPaintings.length > 0 ? (

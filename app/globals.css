@@ -46,7 +46,7 @@ a {
   font-weight: 750;
   margin-right: 20px;
 }
-@media (min-width: 901px) {
+@media (min-width: 1017px) {
   .navbar li:nth-child(4) {
     margin-left: auto;
   }
@@ -61,7 +61,7 @@ a {
   color: #ffffff;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1016px) {
   .navbar.open {
     z-index: 101;
     width: 100%;
@@ -71,6 +71,12 @@ a {
     left: 0;
     background-color: rgba(0, 0, 0, 0.9);
   }
+
+  .navbar-item {
+    margin: 20px 0px;
+    font-size: 25px;
+  }
+
   .navbar-list {
     display: none;
     flex-direction: column;
@@ -83,8 +89,6 @@ a {
 
   .navbar-link {
     border: none;
-    padding: 10px 0;
-    margin-right: 0;
   }
 
   .hamburger {
@@ -111,20 +115,20 @@ a {
   justify-content: center;
   align-items: center;
   text-align: center;
-  transition: transform 0.3s ease-in-out; /* Add this line */
-}
-
-.hero:hover {
-  transform: scale(1.02);
 }
 
 .hero-border {
   background-image: url("/images/banner.png");
-  background-size: cover;
-  height: 300px;
-  width: 300px;
-  border-radius: 50px;
+  background-size: contain;
+  height: clamp(200px, 20vw, 300px);
+  width: clamp(200px, 20vw, 300px);
+  border-radius: 10px;
   background-color: #000000;
+  transition: transform 0.4s ease-in-out; /* Add this line */
+}
+
+.hero-border:hover {
+  transform: scale(1.07);
 }
 
 .hero-title {
@@ -167,15 +171,27 @@ a {
 
 .section {
   background-color: #6c6c6c;
+  margin: 100px 0px;
   padding: 20px;
 }
 
 .section-header {
-  text-align: left;
+  text-align: center;
+  font-family: var(--font-alex-brush);
+  font-size: clamp(60px, 10vw, 90px);
+  color: white;
+  margin-bottom: 15px;
+}
+
+.description {
+  color: white;
+  font-family: var(--font-roboto);
+  text-align: justify;
 }
 
 .card {
   background-color: #dddddd;
+  border: 5px solid #141313;
   padding: 20px;
   margin-top: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
