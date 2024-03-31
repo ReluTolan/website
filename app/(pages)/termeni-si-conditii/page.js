@@ -1,4 +1,5 @@
 import "@/app/(pages)/page-styles.css"
+import Link from "next/link"
 
 export default function TermeniSiConditii() {
   return (
@@ -15,10 +16,16 @@ export default function TermeniSiConditii() {
 
       <h2>1. Definiţiile termenilor utilizaţi</h2>
       <p>
-        <strong>SERVICII</strong> - serviciile electronice ”Expoziție cu
-        vânzare” și Piața de vechi” care permit utilizatorilor să-și promoveze
-        creațiile artistice și/sau obiectele/bunurile artistice/de
-        anticariat/artizanale etc.
+        <strong>SERVICII</strong> - serviciile electronice{" "}
+        <Link href={"/expozitie/artisti"} className="underline-blue">
+          ”Expoziție cu vânzare”
+        </Link>{" "}
+        și{" "}
+        <Link href={"/piata"} className="underline-blue">
+          Piața de vechi”
+        </Link>{" "}
+        care permit utilizatorilor să-și promoveze creațiile artistice și/sau
+        obiectele/bunurile artistice/de anticariat/artizanale etc.
       </p>
       <p>
         <strong>UTILIZATOR</strong> - persoană fizică sau juridică care

@@ -1,4 +1,5 @@
 import "@/app/(pages)/page-styles.css"
+import Link from "next/link"
 
 const DespreNoi = () => {
   return (
@@ -14,11 +15,15 @@ const DespreNoi = () => {
           de promovare îndeosebi a artelor plastice.
         </p>
         <p>
-          Chiar mai mult, secțiunea „Pastila de IA” (pastila de inteligență
-          artificială) își dorește să sublinieze apetitul și deschiderea
-          artistei Aurelia Stepan către îmbinarea „noului” cu „frumosul”, apetit
-          pe care-l considerăm o bună sursă de inspirație corectă pentru toți
-          vizitatorii (tineri și mai puțini tineri) platformei ArtStep.
+          Chiar mai mult, secțiunea{" "}
+          <Link href={"/pastila-de-ia"} className="underline-blue">
+            „Pastila de IA”
+          </Link>{" "}
+          (pastila de inteligență artificială) își dorește să sublinieze
+          apetitul și deschiderea artistei Aurelia Stepan către îmbinarea
+          „noului” cu „frumosul”, apetit pe care-l considerăm o bună sursă de
+          inspirație corectă pentru toți vizitatorii (tineri și mai puțini
+          tineri) platformei ArtStep.
         </p>
         <p>
           Astfel, ArtStep este o platformă de promovare în special a artiștilor
@@ -50,9 +55,16 @@ const DespreNoi = () => {
           ArtStep fiind o platformă de promovare gratuită în special a
           artiștilor plastici din România, nu are posibilitatea verificării
           veridicității informațiilor publicate de către terți / vânzători în
-          secțiunile „Expoziție cu vânzare” și „Piața de vechi”, ca atare nu ne
-          asumăm responsabilitatea în ceea ce privește autenticitatea
-          informațiilor publicate de către vânzători / terți.
+          secțiunile{" "}
+          <Link href={"/expozitie/artisti"} className="underline-blue">
+            „Expoziție cu vânzare”
+          </Link>{" "}
+          și{" "}
+          <Link href={"/piata"} className="underline-blue">
+            „Piața de vechi”
+          </Link>{" "}
+          , ca atare nu ne asumăm responsabilitatea în ceea ce privește
+          autenticitatea informațiilor publicate de către vânzători / terți.
         </p>
         <p>
           <strong>Recomandarea noastră fermă:</strong> ArtStep vă recomandă

@@ -17,14 +17,42 @@ const getSizeCategory = sizeCm => {
 }
 
 const PainterPage = () => {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [size, setSize] = useState("")
-  const [price, setPrice] = useState("")
-  const [selectedPainter, setSelectedPainter] = useState("Aurelia Stepan")
+  const [searchTerm, setSearchTerm] = useState(
+    localStorage.getItem("searchTerm") || ""
+  )
+  const [size, setSize] = useState(localStorage.getItem("size") || "")
+  const [price, setPrice] = useState(localStorage.getItem("price") || "")
+  const [selectedPainter, setSelectedPainter] = useState(
+    localStorage.getItem("selectedPainter") || "Aurelia Stepan"
+  )
   const [filteredPaintings, setFilteredPaintings] = useState([])
   const [allPaintings, setAllPaintings] = useState([])
   const [painters, setPainters] = useState([])
-  const [availability, setAvailability] = useState("disponibile")
+  const [availability, setAvailability] = useState(
+    localStorage.getItem("availability") || "disponibile"
+  )
+
+  useEffect(() => {
+    localStorage.setItem("searchTerm", searchTerm)
+    localStorage.setItem("size", size)
+    localStorage.setItem("price", price)
+    localStorage.setItem("selectedPainter", selectedPainter)
+    localStorage.setItem("availability", availability)
+  }, [searchTerm, size, price, selectedPainter, availability])
+
+  const resetFilters = () => {
+    setSearchTerm("")
+    setSize("")
+    setPrice("")
+    setSelectedPainter("Aurelia Stepan")
+    setAvailability("disponibile")
+
+    localStorage.setItem("searchTerm", "")
+    localStorage.setItem("size", "")
+    localStorage.setItem("price", "")
+    localStorage.setItem("selectedPainter", "Aurelia Stepan")
+    localStorage.setItem("availability", "disponibile")
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -109,6 +137,7 @@ const PainterPage = () => {
         painters={painters}
         onPainterChange={setSelectedPainter}
         selectedPainter={selectedPainter} // default painter when the page loads (Aurelia Stepan)
+        onResetFilters={resetFilters}
       />
       <div style={{ marginTop: "100px" }}>
         <div className="align-painter-buttons">

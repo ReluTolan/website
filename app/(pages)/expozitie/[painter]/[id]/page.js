@@ -188,10 +188,10 @@ const ImageDetails = ({ params }) => {
             &times;
           </span>
           <button className="cycle" onClick={handlePrevClick}>
-            Inapoi
+            &lt;
           </button>
           <button className="cycle" onClick={handleNextClick}>
-            Inainte
+            &gt;
           </button>
           <Image
             className="modal-content"

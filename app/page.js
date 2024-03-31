@@ -4,8 +4,8 @@ import Link from "next/link"
 export default function Home() {
   return (
     <>
-      <main>
-        <div className="hero" style={{ marginTop: "90px" }}>
+      <main style={{ marginTop: "90px" }}>
+        <div className="hero">
           <Link href={"/expozitie/artisti"}>
             <div className="hero-border"></div>
           </Link>
@@ -35,7 +35,7 @@ export default function Home() {
             </p>
           </div>
           <div className="card">
-            <h3>Expoziție cu vânzare</h3>
+            <h3 className="underline-blue">Expoziție cu vânzare</h3>
             <p>
               În secțiunea Expoziție cu vânzare veți găsi creațiile artiștilor,
               amatori sau profesioniști, pe care îi veți putea contacta în mod
@@ -44,7 +44,7 @@ export default function Home() {
             </p>
           </div>
           <div className="card">
-            <h3>Piața de vechi</h3>
+            <h3 className="underline-blue">Piața de vechi</h3>
             <p>
               În secțiunea Piața de vechi veți găsi obiecte de artă, artizanat,
               anticariat, decor, mobilă veche, etc., pe care le veți putea
@@ -53,7 +53,9 @@ export default function Home() {
             </p>
           </div>
           <div className="card">
-            <h3>Pastila de IA (inteligență artificială)</h3>
+            <h3 className="underline-blue">
+              Pastila de IA (inteligență artificială)
+            </h3>
             <p>
               În secțiunea Pastila de IA (inteligență artificială) veți găsi
               articole / tutoriale, generate de AI, cu tematică artistică.

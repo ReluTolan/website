@@ -28,9 +28,16 @@ export default function CumCumparVand() {
           ArtStep fiind o platformă de promovare gratuită, în special a
           artiștilor plastici din România, nu are posibilitatea verificării
           veridicității informațiilor publicate de către terți / vânzători în
-          secțiunile "Expoziție cu vânzare" și "Piața de vechi", ca atare nu ne
-          asumăm responsabilitatea în ceea ce privește autenticitatea
-          informațiilor publicate de către vânzători / terți.
+          secțiunile{" "}
+          <Link href={"/expozitie/artisti"} className="underline-blue">
+            "Expoziție cu vânzare"
+          </Link>{" "}
+          și{" "}
+          <Link href={"/piata"} className="underline-blue">
+            "Piața de vechi"
+          </Link>
+          , ca atare nu ne asumăm responsabilitatea în ceea ce privește
+          autenticitatea informațiilor publicate de către vânzători / terți.
         </p>
       </div>
 
@@ -48,7 +55,7 @@ export default function CumCumparVand() {
       <h1 className="cum-title">Cum vând?</h1>
       <p className="cum-subtitle">Nimic mai simplu!</p>
 
-      <h2 className="cum-section-title">
+      <h2 className="cum-section-title underline-blue">
         <Link href={"/expozitie/artisti"}>
           SECȚIUNEA "EXPOZIȚIE CU VÂNZARE"
         </Link>
@@ -77,7 +84,7 @@ export default function CumCumparVand() {
         Îți dorim succes și negocieri cu folos!
       </p>
 
-      <h2 className="cum-section-title">
+      <h2 className="cum-section-title underline-blue">
         <Link href={"/piata"}>SECȚIUNEA "PIAȚA DE VECHI"</Link>
       </h2>
       <p style={{ marginBottom: "20px" }}>

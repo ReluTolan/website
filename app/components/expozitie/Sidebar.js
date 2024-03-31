@@ -10,6 +10,7 @@ const Sidebar = ({
   painters,
   onPainterChange,
   selectedPainter,
+  onResetFilters,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -68,6 +69,7 @@ const Sidebar = ({
               {priceRange}
             </label>
           ))}
+          <button onClick={onResetFilters}>Resetare filtre</button>
         </div>
 
         <div className="icon" onClick={() => setIsOpen(!isOpen)}>
