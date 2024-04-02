@@ -11,6 +11,8 @@ const Sidebar = ({
   onPainterChange,
   selectedPainter,
   onResetFilters,
+  size,
+  price,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -49,6 +51,7 @@ const Sidebar = ({
                 name="size"
                 value={sizeOption}
                 onChange={event => onSizeChange(event.target.value)}
+                checked={sizeOption === size}
               />
               {sizeOption.charAt(0).toUpperCase() + sizeOption.slice(1)}
             </label>
@@ -65,6 +68,7 @@ const Sidebar = ({
                 name="price"
                 value={priceRange}
                 onChange={event => onPriceChange(event.target.value)}
+                checked={priceRange === price}
               />
               {priceRange}
             </label>

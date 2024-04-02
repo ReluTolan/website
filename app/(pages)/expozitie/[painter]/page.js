@@ -138,6 +138,8 @@ const PainterPage = () => {
         onPainterChange={setSelectedPainter}
         selectedPainter={selectedPainter} // default painter when the page loads (Aurelia Stepan)
         onResetFilters={resetFilters}
+        size={size}
+        price={price}
       />
       <div style={{ marginTop: "100px" }}>
         <div className="align-painter-buttons">
