@@ -14,7 +14,7 @@ const Sidebar = ({
   size,
   price,
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
 
   return (
     <div className={`sidebar ${isOpen ? "" : "closed"}`}>

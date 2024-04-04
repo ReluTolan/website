@@ -4,7 +4,7 @@ import { FiMenu, FiX } from "react-icons/fi"
 import { useState } from "react"
 
 const Sidebar = ({ onSearchChange }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
 
   return (
     <div className={`sidebar ${isOpen ? "" : "closed"}`}>
