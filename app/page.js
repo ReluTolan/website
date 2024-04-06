@@ -75,7 +75,7 @@ export default function Home() {
               În concluzie, arta și ”frumosul” fiind un domeniu strict
               subiectiv, fiecare creație / obiect având o frumusețe și
               semnificație intrinsecă, vă încurajăm și vă recomandăm ferm să
-              accesați / achiziționați doar acele creațiile / obiecte cu care
+              accesați / achiziționați doar acele creații / obiecte cu care
               rezonați artistic / emoțional. Doar în acest fel, scopul
               platformei ArtStep de a uni deținătorul cu obiectul / creația
               artistică va fi desăvârșit.

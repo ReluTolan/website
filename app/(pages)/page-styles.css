@@ -403,7 +403,7 @@ textarea::placeholder {
 }
 .pastila-focus img {
   display: block;
-  max-width: 100%;
+  max-width: 50%;
   margin: auto;
 }
 

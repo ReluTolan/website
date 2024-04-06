@@ -35,10 +35,14 @@ const Page = () => {
             Adaugare admin
           </button>
         </Link>
-        <h1 style={{ marginBottom: "50px" }}>
+        <h2 style={{ marginBottom: "10px" }}>
           Consumul moderat de IA (inteligență artificială) îmbunătățește
-          calitatea vieții
-        </h1>
+          calitatea vieții !
+        </h2>
+        <h2>
+          Consumul excesiv de IA poate dăuna grav moralității și/sau
+          obiectivității !
+        </h2>
       </div>
       {pastilas.map((pastila, index) => (
         <div
