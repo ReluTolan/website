@@ -35,7 +35,9 @@ export default function Home() {
             </p>
           </div>
           <div className="card">
-            <h3 className="underline-blue">Expoziție cu vânzare</h3>
+            <Link href={"/expozitie/artisti"}>
+              <h3 className="underline-blue">Expoziție cu vânzare</h3>
+            </Link>
             <p>
               În secțiunea Expoziție cu vânzare veți găsi creațiile artiștilor,
               amatori sau profesioniști, pe care îi veți putea contacta în mod
@@ -44,7 +46,9 @@ export default function Home() {
             </p>
           </div>
           <div className="card">
-            <h3 className="underline-blue">Piața de vechi</h3>
+            <Link href={"/piata"}>
+              <h3 className="underline-blue">Piața de vechi</h3>
+            </Link>
             <p>
               În secțiunea Piața de vechi veți găsi obiecte de artă, artizanat,
               anticariat, decor, mobilă veche, etc., pe care le veți putea
@@ -53,9 +57,11 @@ export default function Home() {
             </p>
           </div>
           <div className="card">
-            <h3 className="underline-blue">
-              Pastila de IA (inteligență artificială)
-            </h3>
+            <Link href={"/pastila-de-ia"}>
+              <h3 className="underline-blue">
+                Pastila de IA (inteligență artificială)
+              </h3>
+            </Link>
             <p>
               În secțiunea Pastila de IA (inteligență artificială) veți găsi
               articole / tutoriale, generate de AI, cu tematică artistică.
