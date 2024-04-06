@@ -23,7 +23,7 @@ export default function Home() {
               ArtStep este o platformă de promovare gratuită, în special a
               artiștilor plastici amatori sau profesioniști, dar și a
               deținătorilor legitimi de obiecte de artă, artizanat, anticariat,
-              decor, mobilă veche, etc., care doresc să-și vândă creațiile /
+              decor, mobilă veche, etc., care doresc să-și vândă creații /
               obiectele contra unei sume corect evaluate, respectiv negociate.
             </p>
             <br />
