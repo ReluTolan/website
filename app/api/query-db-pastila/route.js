@@ -5,7 +5,7 @@ import { NextResponse } from "next/server"
 
 export async function POST() {
   try {
-    const result = await sql`SELECT * FROM pastila;`
+    const result = await sql`SELECT * FROM pastila ORDER BY id DESC;`
     const response = NextResponse.json(result.rows)
     return response
   } catch (error) {
